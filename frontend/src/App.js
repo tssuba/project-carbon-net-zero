@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import * as React from 'react';
 import Navbar from './components/navbar';
 import { Button } from '@mui/material';
 import { ButtonGroup } from '@mui/material';
@@ -9,15 +10,26 @@ import { Container } from '@mui/system';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 
+// export default function DisabledTabs() {
+//   const [value, setValue] = React.useState(2);
+
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
+// }
+
+
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#F5F5F5',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(0.5),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
@@ -25,6 +37,11 @@ const Item = styled(Paper)(({ theme }) => ({
 const theme = createTheme();
 
 function App() {
+  const [value, setValue] = React.useState('one');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -74,6 +91,26 @@ function App() {
               </Typography>
               </Grid>
             </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={1}>
+                <Item variant="outlined" elevation={0}>Elsevier</Item>
+              </Grid>
+              <Grid item xs={1}>
+                <Item variant="outlined" elevation={0}>Springer</Item>
+
+              </Grid>
+            </Grid>
+            <Tabs 
+            aria-label="navigation tabs"
+            value={value}
+            onChange={handleChange}
+            sx = {{pt: 2, pl: 0}}>
+              <Tab label="Overview" />
+              <Tab label="Briefing"/>
+              <Tab label="Papers"/>
+              <Tab label="News"/>
+              <Tab label="People"/>
+            </Tabs>
           </Container>
         </Box>
       </main>
