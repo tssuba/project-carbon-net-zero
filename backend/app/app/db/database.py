@@ -15,7 +15,7 @@ import sqlalchemy.orm as _orm
 # engine = create_engine(SQLALCHEMY_DATABASE_URI)
 
 
-engine = _sql.create_engine("postgresql://postgres:Tanmay123@localhost/item_db", 
+engine = _sql.create_engine("postgresql://postgres:password@localhost/item_db", 
     echo = True
 )
 
