@@ -94,7 +94,7 @@ class GoogleNewsScraper:
             date_time_obj (datetime): Parsed python datetime object.
         """
 
-        date_time_obj = datetime.strptime(date_time_str, self.DATE_TIME_FORMAT)
+        date_time_obj = datetime.strptime(date_time_str, self.DATE_TIME_FORMAT).date()
         return date_time_obj
 
     def scrape_articles(self) -> List[GoogleNewsArticle]:
