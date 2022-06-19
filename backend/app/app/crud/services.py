@@ -2,8 +2,9 @@ from typing import List, Dict, Union
 
 from google_news_scraper import GoogleNewsArticle, GoogleNewsScraper
 from journals_scraper import ResearchArticle, JournalsScraper
+from twitter_scraper import tweetId, TwitterScraper
 
-from models.models import Article, ResearchArticle,  Item
+from models.models import Article, ResearchArticle,  Item, TweetId
 
 import fastapi as _fastapi
 import datetime as _dt
@@ -60,6 +61,19 @@ async def fetch_research_articles(db: _orm.Session, articles: List[ResearchArtic
     return list(map(_schemas.ResearchArticle.from_orm, research))
 
 
+async def fetch_tweetIds(db: _orm.Session, articles: List[tweetId]):
+
+    obj_list = []
+    data_list = articles
+    for record in data_list:
+        data_obj = _models.TweetId(**record)
+        obj_list.append(data_obj)
+    db.add_all(obj_list)
+    db.commit()
+    research = db.query(_models.TweetId)
+    return list(map(_schemas.TweetId.from_orm, research))
+
+
 async def get_articles(db: _orm.Session):
     # query = Article.select().order_by(Article.c.id.desc()).limit(25)
     articles = db.query(_models.Article).order_by(Article.id.desc()).limit(25)
@@ -74,8 +88,21 @@ async def get_research_articles(db: _orm.Session):
     return list(map(_schemas.ResearchArticle.from_orm, articles))
 
 
+async def get_tweetIds(db: _orm.Session):
+    # query = Article.select().order_by(Article.c.id.desc()).limit(25)
+    articles = db.query(_models.TweetId).order_by(TweetId.id.desc()).limit(10)
+
+    return list(map(_schemas.TweetId.from_orm, articles))
+
+
 async def delete_all_articles(db: _orm.Session):
     articles = db.query(_models.Article)
+
+    articles.delete()
+    db.commit()
+
+async def delete_all_tweets(db: _orm.Session):
+    articles = db.query(_models.TweetId)
 
     articles.delete()
     db.commit()

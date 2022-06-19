@@ -35,3 +35,18 @@ class ResearchArticle(_ResearchArticleBase):
 
     class Config:
         orm_mode = True
+
+
+class _TweetIdBase(_pydantic.BaseModel):
+    tweetId:Optional[str] = None
+
+
+class TweetIdCreate(_TweetIdBase):
+    pass
+
+
+class TweetId(_TweetIdBase):
+    id: int
+
+    class Config:
+        orm_mode = True

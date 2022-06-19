@@ -7,6 +7,7 @@ from db.database import SessionLocal
 
 from google_news_scraper import GoogleNewsArticle, GoogleNewsScraper
 from journals_scraper import ResearchArticle, JournalsScraper
+from twitter_scraper import tweetId, TwitterScraper
 
 import models
 import fastapi as _fastapi
@@ -41,6 +42,9 @@ google_scaper = GoogleNewsScraper(query)
 
 research_scaper = JournalsScraper()
 
+twitter_scaper = TwitterScraper()
+
+
 class Item(BaseModel):
     id: int
     name: str
@@ -69,6 +73,15 @@ async def fetch_articles(
     return await _services.fetch_articles(db = db, articles = google_scaper.scrape_articles()) #
 
 
+@app.get("/tweets/fetch") # , response_model = List[GoogleNewsArticle]
+async def fetch_tweets(
+    # articles = fetched_articles,
+    db: _orm.Session = _fastapi.Depends(_services.get_db),
+):
+    _services.create_database()
+    return await _services.fetch_tweetIds(db = db, articles = twitter_scaper.scrape_twitter())
+
+
 @app.get("/research/fetch")
 async def fetch_research_articles(
     # articles = fetched_articles,
@@ -92,6 +105,13 @@ async def get_research_articles(
     return await _services.get_research_articles(db = db)
 
 
+@app.get("/tweets", response_model = List[_schemas.TweetId])
+async def get_TweetIds(
+    db: _orm.Session = _fastapi.Depends(_services.get_db)
+):
+    return await _services.get_tweetIds(db = db)
+
+
 @app.delete("/news") # , status_code=204 produces an error?
 async def delete_all_articles(
     db: _orm.Session = _fastapi.Depends(_services.get_db)
@@ -106,6 +126,14 @@ async def delete_all_research_articles(
 ):
     await _services.delete_all_research_articles(db)
     return {"message", "Successfully Deleted"}
+
+@app.delete("/tweets") # , status_code=204
+async def delete_all_TweetIds(
+    db: _orm.Session = _fastapi.Depends(_services.get_db)
+):
+    await _services.delete_all_tweets(db)
+    return {"message", "Successfully Deleted"}
+
 
 @app.get('/items',response_model=List[Item], status_code = 200)
 def get_all_items():

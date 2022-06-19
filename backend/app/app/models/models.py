@@ -24,6 +24,11 @@ class ResearchArticle(_database.Base):
     publisher = _sql.Column(_sql.String, index=True, default="")
     title = _sql.Column(_sql.String, index=True, default="")
 
+class TweetId(_database.Base):
+    __tablename__ = "tweetIds"
+    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
+    tweetId = _sql.Column(_sql.String, index=True, default="")
+
 
 class Item(Base):
     __tablename__ = 'items'
