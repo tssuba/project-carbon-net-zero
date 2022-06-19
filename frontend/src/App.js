@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Stack from '@mui/material/Stack';
+import iitmlogo from "./components/navbar/iitmlogo.svg"
 
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -67,7 +68,8 @@ const themebutton = createTheme({
 });
 
 function App() {
-  const [value, setValue] = React.useState('one');
+  const [value, setValue] = React.useState(0);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -129,12 +131,26 @@ function App() {
                 don&apos;t simply skip over it entirely.
               </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs = {2}>
+              <Typography variant="subtitle2" align="right" color="text.secondary" paragraph
+              sx = {{ pt: 3, pr: 3}}>
+                      Made in IITM
+                      </Typography>
+              </Grid>
+              <Grid item xs = {1}>
+              <img src={iitmlogo} width={60} align="right"/>
+              </Grid>
+              {/* <Grid item xs={1}>
+                <img src={iitmlogo} width={60} sx = {{
+                  pt: 10
+                }}/>
+              </Grid>
+              <Grid item xs={2}>
               <Typography variant="subtitle2" align="right" color="text.secondary" paragraph
               sx = {{ pt: 6}}>
                 IIT Madras
               </Typography>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Stack direction="row" spacing={2}>
               <Grid item xs={2}>
@@ -153,7 +169,9 @@ function App() {
             aria-label="navigation tabs"
             value={value}
             onChange={handleChange}
-            sx = {{pt: 1, pb: 4}}>
+            sx = {{pt: 2, pb: 3}}
+            variant="scrollable"
+            scrollButtons="auto">
               <Tab label="Overview" />
               <Tab label="Briefing"/>
               <Tab label="Papers"/>

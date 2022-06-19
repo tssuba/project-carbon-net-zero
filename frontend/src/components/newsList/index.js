@@ -46,12 +46,12 @@ export default function NewsList() {
           // fontWeight: 600,
           fontSize: 12,
         }}
-        >Recent news articles published that discuss topics relevant to achieving Carbon Net-Zero</Typography>
+        >Popular news articles published that discuss topics relevant to achieving Carbon Net-Zero</Typography>
         <Divider/>
         <List sx={{ 
           width: '100%',
           maxWidth: 600,
-          maxHeight: 300,
+          maxHeight: 350,
           overflow: 'auto',
           bgcolor: 'background.paper' }}>
             {posts.map(post => (

@@ -30,7 +30,7 @@ export default function ResearchList() {
       maxWidth: 600,
       minWidth: 300
     }}>
-      <Paper variant='outlined'>
+      <Paper variant='outlined' sx = {{}}>
         <Typography sx = {{
           pt: 2,
           pl: 2,
@@ -46,12 +46,12 @@ export default function ResearchList() {
           // fontWeight: 600,
           fontSize: 12,
         }}
-        >Research from different journals published that discuss topics relevant to achieving Carbon Net-Zero</Typography>
+        >Upcoming and published research from different journals</Typography>
         <Divider/>
         <List sx={{ 
           width: '100%',
           maxWidth: 600,
-          maxHeight: 300,
+          maxHeight: 350,
           overflow: 'auto',
           bgcolor: 'background.paper' }}>
             {posts.map(post => (
