@@ -23,6 +23,9 @@ import { styled } from '@mui/material/styles';
 
 import axios from "axios";
 import {useState, useEffect} from "react";
+// import TweetEmbed from 'react-tweet-embed';
+import { TwitterTweetEmbed } from 'react-twitter-embed'
+import TweetsList from './components/twitterList';
 
 // export default function DisabledTabs() {
 //   const [value, setValue] = React.useState(2);
@@ -89,8 +92,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Navbar />
+      <CssBaseline />
       <main>
         <Box
         sx={{
@@ -181,6 +184,7 @@ function App() {
             {/* <NewsList />
             <ResearchList /> */}
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 6, sm: 6, md: 12 }} sx = {{
+            pb: 4
             }}>
               <Grid item xs={6}>
                 <NewsList />
@@ -189,6 +193,27 @@ function App() {
                 <ResearchList />
               </Grid>
             </Grid>
+            {/* <Stack direction = "row" spacing={2} sx = {{
+              maxWidth: 1000
+            }}>
+              <Box sx = {{
+                width: 1000
+              }}>
+            <TwitterTweetEmbed tweetId = {'933354946111705097'} />
+            </Box>
+            <Box sx = {{
+                width: 1000
+              }}>
+                <TwitterTweetEmbed tweetId = {'1538500537586434048'} />
+              </Box>
+              <Box sx = {{
+                width: 1000
+              }}>
+                <TwitterTweetEmbed tweetId = {'1538498613919289345'} />
+              </Box>
+            </Stack> */}
+              
+            <TweetsList />
           </Container>
         </Box>
       </main>
