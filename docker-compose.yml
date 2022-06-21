@@ -3,6 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres
+    container_name: database
     volumes:
       - ./db-data:/var/lib/postgresql/data
     ports:
@@ -12,3 +13,80 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=primer_db
     restart: always
+    networks:
+      - database_network
+
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend/app
+      dockerfile: backend.dockerfile
+    command: uvicorn main:app  --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./backend/app:/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - ./backend/app/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+      - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
+      - "traefik.docker.network=traefik_network"
+
+    networks:
+      - database_network
+      - traefik_network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    command: npm start
+    volumes:
+      - ./frontend:/app/
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
+      - "traefik.docker.network=traefik_network"
+    networks: 
+      - traefik_network
+
+  
+  proxy:
+    container_name: traefik_proxy
+    image: traefik:2.7
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=false"
+    ports:
+      - 80:80
+      - 443:443
+    command:
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik_network"
+      - "--entrypoints.web.address=:80"
+      - "--accesslog=true"
+      - "--log.level=DEBUG"
+      - "--api=true"
+      - "--api.dashboard=true"
+    networks:
+      - traefik_network
+
+networks:
+  database_network:
+    driver: bridge
+  traefik_network:
+    external: true
