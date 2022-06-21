@@ -11,5 +11,8 @@
 
     - backend:
         - url: http://api.localhost
+        - For api docs
+            - url: http://api.localhost/docs
+        
     - frontend:
         - url: http://localhost
