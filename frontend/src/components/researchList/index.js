@@ -21,7 +21,7 @@ export default function ResearchList() {
   }, [])
 
   const fetchData = async () => {
-    const {data} = await axios.get("http://127.0.0.1:8000/research")
+    const {data} = await axios.get("http://api.localhost/research")
 
     setPosts(data)
   }

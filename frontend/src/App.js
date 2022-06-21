@@ -85,7 +85,7 @@ function App() {
   }, [])
 
   const fetchData = async () => {
-    const {data} = await axios.get("http://127.0.0.1:8000/news")
+    const {data} = await axios.get("http://api.localhost/news")
 
     setPosts(data)
   }
