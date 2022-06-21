@@ -13,7 +13,9 @@ from twitter_scraper import tweetId, TwitterScraper
 
 services.create_database()
 
-app = FastAPI()
+app = FastAPI(
+    title="Carbon Net Zero",
+)
 
 
 app.add_middleware(
