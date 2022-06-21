@@ -1,27 +1,20 @@
-import sqlalchemy as _sql
-import sqlalchemy.ext.declarative as _declarative
-import sqlalchemy.orm as _orm
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
-# host = os.environ["POSTGRES_HOST"]
-# port = os.environ["POSTGRES_PORT"]
-# user = os.environ["POSTGRES_USER"]
-# password = os.environ["POSTGRES_PASS"]
-# db = os.environ["POSTGRES_DB"]
-# dbtype = "postgresql"
-
-# SQLALCHEMY_DATABASE_URI = f"{dbtype}://{user}:{password }@{host}:{port}/{db}"
-
-# engine = create_engine(SQLALCHEMY_DATABASE_URI)
+DB_USER = "postgres"
+DB_PASSWORD = "postgres"
+DB_HOST = "localhost"
+DB_PORT = "5432"
+DB_NAME = "primer_db"
 
 
-engine = _sql.create_engine("postgresql://postgres:password@localhost/item_db", 
-    echo = True
+SQLALCHEMY_DATABASE_URL = (
+    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
-SessionLocal = _orm.sessionmaker(bind = engine)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = _declarative.declarative_base()
-
-
-
+Base = declarative_base()
