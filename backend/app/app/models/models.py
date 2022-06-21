@@ -28,14 +28,3 @@ class TweetId(Base):
     __tablename__ = "tweetIds"
     id = Column(Integer, primary_key=True, index=True)
     tweetId = Column(String, index=True, default="")
-
-
-class Item(Base):
-    __tablename__ = "items"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(255), nullable=False, unique=True)
-
-
-# return string representation in console
-def __repr__(self):
-    return f"<Item name = {self.name}>"

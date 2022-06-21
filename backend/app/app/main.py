@@ -1,8 +1,9 @@
-from fastapi import FastAPI as _fastapi
+from fastapi import FastAPI
 from fastapi import status, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
+
 from typing import List, Dict, Union
 
 from sqlalchemy import orm
@@ -18,15 +19,13 @@ from schemas import schemas
 
 from db.database import SessionLocal, Base, engine
 
+# run migrations on Startup
 Base.metadata.create_all(bind=engine)
 
-app = _fastapi()
+app = FastAPI()
 
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
 ]
@@ -46,15 +45,6 @@ google_scaper = GoogleNewsScraper(query)
 research_scaper = JournalsScraper()
 
 twitter_scaper = TwitterScraper()
-
-
-class Item(BaseModel):
-    id: int
-    name: str
-
-    class Config:
-        orm_mode = True
-
 
 db = SessionLocal()
 
@@ -130,54 +120,3 @@ async def delete_all_research_articles(db: orm.Session = Depends(services.get_db
 async def delete_all_TweetIds(db: orm.Session = Depends(services.get_db)):
     await services.delete_all_tweets(db)
     return {"message", "Successfully Deleted"}
-
-
-@app.get("/items", response_model=List[Item], status_code=200)
-def get_all_items():
-    items = db.query(models.Item).all()
-
-    return items
-
-
-@app.get("/item/{item_id}", response_model=Item, status_code=status.HTTP_200_OK)
-def get_an_item(item_id: int):
-    item = db.query(models.Item).filter(models.Item.id == item_id).first()
-    return item
-
-
-@app.post("/items", response_model=Item, status_code=status.HTTP_201_CREATED)
-def create_an_item(item: Item):
-    db_item = db.query(models.Item).filter(models.Item.name == item.name).first()
-
-    if db_item is not None:
-        raise HTTPException(status_code=400, detail="Item already exists")
-
-    new_item = models.Item(name=item.name)
-
-    db.add(new_item)
-    db.commit()
-
-    return new_item
-
-
-@app.put("/item/{item_id}", response_model=Item, status_code=status.HTTP_200_OK)
-def update_an_item(item_id: int, item: Item):
-    item_to_update = db.query(models.Item).filter(models.Item.id == item_id).first()
-    item_to_update.name = item.name
-
-    db.commit()
-
-    return item_to_update
-
-
-@app.delete("/item/{item_id}")
-def delete_item(item_id: int):
-    item_to_delete = db.query(models.Item).filter(models.Item.id == item_id).first()
-
-    if item_to_delete is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Resource Not Found"
-        )
-
-    db.delete(item_to_delete)
-    db.commit()
