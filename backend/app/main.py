@@ -1,20 +1,15 @@
 import os
 from fastapi import FastAPI
-from fastapi import status, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from typing import List
-from sqlalchemy import orm
-
+from routes.api import router
 from crud import services
-from schemas import schemas
+from crud.tasks import repeat_every
 from db.database import SessionLocal
 
 from google_news_scraper import GoogleNewsArticle, GoogleNewsScraper
 from journals_scraper import ResearchArticle, JournalsScraper
 from twitter_scraper import tweetId, TwitterScraper
-
-# run migrations on Startup
 
 services.create_database()
 
@@ -29,85 +24,38 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# add the router to the app
+app.include_router(router)
+
 query = "Carbon Net Zero"
-
 google_scaper = GoogleNewsScraper(query)
-
 research_scaper = JournalsScraper()
-
 twitter_scaper = TwitterScraper()
 
 db = SessionLocal()
 
 
-@app.post("/news", response_model=schemas.Article)
-async def create_article(
-    article: schemas.ArticleCreate, db: orm.Session = Depends(services.get_db)
-):
-    return await services.create_article(db=db, article=article)
-
-
-@app.get("/news/fetch")  # , response_model = List[GoogleNewsArticle]
-async def fetch_articles(
-    # articles = fetched_articles,
-    db: orm.Session = Depends(services.get_db),
-):
+@app.on_event("startup")
+@repeat_every(seconds=500)  # every 30 minutes
+async def fetch_articles_task():
     services.create_database()
-    return await services.fetch_articles(
-        db=db, articles=google_scaper.scrape_articles()
-    )  #
+    await services.fetch_articles(db=db, articles=google_scaper.scrape_articles())
+    return {"message", "Successfully Fetched"}
 
 
-@app.get("/tweets/fetch")  # , response_model = List[GoogleNewsArticle]
-async def fetch_tweets(
-    # articles = fetched_articles,
-    db: orm.Session = Depends(services.get_db),
-):
+@app.on_event("startup")
+@repeat_every(seconds=500)  # every 30 minutes
+async def fetch_tweets():
     services.create_database()
-    return await services.fetch_tweetIds(
-        db=db, articles=twitter_scaper.scrape_twitter()
-    )
+    await services.fetch_tweetIds(db=db, articles=twitter_scaper.scrape_twitter())
+    return {"message", "Successfully Fetched"}
 
 
-@app.get("/research/fetch")
-async def fetch_research_articles(
-    # articles = fetched_articles,
-    db: orm.Session = Depends(services.get_db),
-):
+@app.on_event("startup")
+@repeat_every(seconds=500)  # every 30 minutes
+async def fetch_research_articles():
     services.create_database()
-    return await services.fetch_research_articles(
+    await services.fetch_research_articles(
         db=db, articles=research_scaper.scrape_scopus()
     )
-
-
-@app.get("/news", response_model=List[schemas.Article])
-async def get_articles(db: orm.Session = Depends(services.get_db)):
-    return await services.get_articles(db=db)
-
-
-@app.get("/research", response_model=List[schemas.ResearchArticle])
-async def get_research_articles(db: orm.Session = Depends(services.get_db)):
-    return await services.get_research_articles(db=db)
-
-
-@app.get("/tweets", response_model=List[schemas.TweetId])
-async def get_TweetIds(db: orm.Session = Depends(services.get_db)):
-    return await services.get_tweetIds(db=db)
-
-
-@app.delete("/news")  # , status_code=204 produces an error?
-async def delete_all_articles(db: orm.Session = Depends(services.get_db)):
-    await services.delete_all_articles(db)
-    return {"message", "Successfully Deleted"}
-
-
-@app.delete("/research")  # , status_code=204
-async def delete_all_research_articles(db: orm.Session = Depends(services.get_db)):
-    await services.delete_all_research_articles(db)
-    return {"message", "Successfully Deleted"}
-
-
-@app.delete("/tweets")  # , status_code=204
-async def delete_all_TweetIds(db: orm.Session = Depends(services.get_db)):
-    await services.delete_all_tweets(db)
-    return {"message", "Successfully Deleted"}
+    return {"message", "Successfully Fetched"}
