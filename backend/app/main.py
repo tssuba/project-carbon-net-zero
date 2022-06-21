@@ -1,38 +1,29 @@
+import os
 from fastapi import FastAPI
 from fastapi import status, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from pydantic import BaseModel
-
-from typing import List, Dict, Union
-
+from typing import List
 from sqlalchemy import orm
+
+from crud import services
+from schemas import schemas
+from db.database import SessionLocal
 
 from google_news_scraper import GoogleNewsArticle, GoogleNewsScraper
 from journals_scraper import ResearchArticle, JournalsScraper
 from twitter_scraper import tweetId, TwitterScraper
 
-
-import models
-from crud import services
-from schemas import schemas
-
-from db.database import SessionLocal, Base, engine
-
 # run migrations on Startup
-Base.metadata.create_all(bind=engine)
+
+services.create_database()
 
 app = FastAPI()
 
 
-origins = [
-    "http://localhost:8080",
-    "http://localhost:3000",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=os.getenv("ALLOWED_CORS_ORIGIN", "*"),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
