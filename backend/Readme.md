@@ -1,22 +1,33 @@
-### Dependencies
+# Backend Information:
 
-* Postgresql (Username:postgres, password:Tanmay123)
+## Packages used
 
-### Get it running
+- Fastapi
+- Pydantic
+- Uvicorn
+- sqlalchemy
+- pandas
+- beautifulsoup
 
+## Database information:
 
-``` 
-env/bin/activate
-```
+- Database: PostgreSQL
+- Username: user
+- Password: password
+- Database Name: primer_db
+- Port: 5432
 
-``` 
-pip install -r requirements.txt
-```
+## Api documentation:
 
-```
-python create_db.py
-```
+- url: http://localhost:8000/docs
 
-```
-python main.py
-```
+## Setting Things up.
+
+- Create a new Virtual environment:
+  - virtualenv
+- Activate the Virtual environment:
+  - source env/bin/activate
+- Install the dependencies:
+  - pip install -r requirements.txt
+- Start the FastAPI Backend Server:
+  - uvicorn main:app --reload
