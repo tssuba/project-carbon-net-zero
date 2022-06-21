@@ -6,7 +6,7 @@ RUN apt-get update \
     && apt-get install gcc -y \
     && apt-get clean 
 
-COPY package*.json ./
+COPY package.json /app/
 
 RUN npm install --force
 
