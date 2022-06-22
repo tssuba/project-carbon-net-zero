@@ -1,13 +1,11 @@
-FROM --platform=amd64 node:16-bullseye-slim 
+FROM node:16-bullseye-slim 
+
+RUN apt update
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install gcc -y \
-    && apt-get clean 
-
-COPY package*.json ./
+COPY package*.json /app/
 
 RUN npm install --force
 
-EXPOSE 3000
+COPY . .
