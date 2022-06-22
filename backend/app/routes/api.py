@@ -74,19 +74,19 @@ async def get_TweetIds(db: Session = Depends(services.get_db)):
     return await services.get_tweetIds(db=db)
 
 
-@router.delete(path="/news", tags=["Delete"])  # , status_code=204 produces an error?
+@router.delete(path="/news", tags=["News"])  # , status_code=204 produces an error?
 async def delete_all_articles(db: Session = Depends(services.get_db)):
     await services.delete_all_articles(db)
     return {"message", "Successfully Deleted"}
 
 
-@router.delete(path="/research", tags=["Delete"])  # , status_code=204
+@router.delete(path="/research", tags=["Research"])  # , status_code=204
 async def delete_all_research_articles(db: Session = Depends(services.get_db)):
     await services.delete_all_research_articles(db)
     return {"message", "Successfully Deleted"}
 
 
-@router.delete(path="/tweets", tags=["Delete"])  # , status_code=204
+@router.delete(path="/tweets", tags=["Tweets"])  # , status_code=204
 async def delete_all_TweetIds(db: Session = Depends(services.get_db),):
     await services.delete_all_tweets(db)
     return {"message", "Successfully Deleted"}
