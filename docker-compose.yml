@@ -16,13 +16,12 @@ services:
     networks:
       - database_network
 
-
   backend:
     container_name: backend
     build:
       context: ./backend/app
       dockerfile: backend.dockerfile
-    command: uvicorn main:app  --reload --host 0.0.0.0 --port 8000
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000
     volumes:
       - ./backend/app:/app/
     ports:
@@ -58,10 +57,9 @@ services:
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.frontend.rule=Host(`localhost`)"
       - "traefik.docker.network=traefik_network"
-    networks: 
+    networks:
       - traefik_network
 
-  
   proxy:
     container_name: traefik_proxy
     image: traefik:2.7
