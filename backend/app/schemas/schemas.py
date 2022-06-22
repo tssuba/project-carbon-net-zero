@@ -1,25 +1,25 @@
-import pydantic as _pydantic
+import pydantic as pydantic
 from typing import Optional
 
-class _ArticleBase(_pydantic.BaseModel):
+class ArticleBase(pydantic.BaseModel):
     published_date:Optional[str] = None
     link:Optional[str] = None
     publisher:Optional[str] = None
     title:Optional[str] = None
 
 
-class ArticleCreate(_ArticleBase):
+class ArticleCreate(ArticleBase):
     pass
 
 
-class Article(_ArticleBase):
+class Article(ArticleBase):
     id: int
 
     class Config:
         orm_mode = True
 
 
-class _ResearchArticleBase(_pydantic.BaseModel):
+class _ResearchArticleBase(pydantic.BaseModel):
     published_date:Optional[str] = None
     doi:Optional[str] = None
     publisher:Optional[str] = None
@@ -37,15 +37,15 @@ class ResearchArticle(_ResearchArticleBase):
         orm_mode = True
 
 
-class _TweetIdBase(_pydantic.BaseModel):
+class TweetIdBase(pydantic.BaseModel):
     tweetId:Optional[str] = None
 
 
-class TweetIdCreate(_TweetIdBase):
+class TweetIdCreate(TweetIdBase):
     pass
 
 
-class TweetId(_TweetIdBase):
+class TweetId(TweetIdBase):
     id: int
 
     class Config:
