@@ -2,12 +2,13 @@
 
 ## Packages used
 
-- Fastapi
+- FastAPI
 - Pydantic
-- Uvicorn
-- sqlalchemy
-- pandas
-- beautifulsoup
+- Uvicorn (Development)
+- Gunicorn (Production)
+- SQLAlchemy
+- Pandas
+- Beautifulsoup
 
 ## Database information:
 
