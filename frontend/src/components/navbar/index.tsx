@@ -10,17 +10,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/plus-jakarta-sans/700.css";
 
 import { styled } from '@mui/material/styles';
 import { ClassNames } from '@emotion/react';
 import { fontWeight } from '@mui/system';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['News', 'Research', 'People'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const styles = {
   customizeToolbar: {
-    minHeight: '36px'
+    minHeight: '36px',
+    display: 'inline-flex'
   }
 };
 
@@ -50,7 +53,9 @@ const ResponsiveAppBar = () => {
           // variant = 'dense'
           style={styles.customizeToolbar}
           disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,
+          color: 'primary.main'
+          }} />
           <Typography
             variant="h6"
             noWrap
@@ -59,14 +64,15 @@ const ResponsiveAppBar = () => {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontFamily: 'IBM Plex Sans',
+              fontWeight: 600,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'primary.main',
               textDecoration: 'none',
+              fontSize: 'medium'
             }}
           >
-            LOGO
+            IITM | Carbon Net Zero
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -76,7 +82,7 @@ const ResponsiveAppBar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color= 'primary'
             >
               <MenuIcon />
             </IconButton>
@@ -100,12 +106,13 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" color='primary'>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon color= 'primary'
+          sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -115,26 +122,30 @@ const ResponsiveAppBar = () => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'IBM Plex Sans',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'primary.main',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            IITM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                size='small'
+                // size='small'
                 sx={{ 
                   // my: 2, 
-                  color: 'white', 
+                  color: 'text.primary', 
                   display: 'block' ,
-                  fontWeight: '700px'
+                  fontWeight: '600',
+                  // fontFamily: 'Plus Jakarta Sans',
+                  // fontSize: 'small',
+                  textTransform: 'none',
+                  // typography: 'body3'
                 }}>
                 {page}
               </Button>

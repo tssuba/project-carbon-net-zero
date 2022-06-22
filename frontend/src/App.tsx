@@ -5,16 +5,16 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from './theme';
-import { CssBaseline, Paper } from '@mui/material';
+import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import ResponsiveAppBar from './components/navbar';
-import { bgcolor } from '@mui/system';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
+import IntroBody from './components/intro';
 
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
-
-const initPalette = getDesignTokens('dark');
 
 
 const navBarStyle = {
@@ -22,14 +22,26 @@ const navBarStyle = {
   display: 'flex',
   width: '100%',
   alignItems: 'center',
-  justifyContent: 'flex-center',
+  justifyContent: 'space-between',
   alignContent: 'flex-start',
-  // bgcolor: 'background.paper',
+  // bgcolor: 'background.default',
   borderRadius: 1,
   fontSize: '1rem',
-  p: 1.2,
+  pt: 1.2,
+  pb: 1.2
 } as const;
 
+const customButtonStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  borderRadius: '10px',
+  border: 1,
+  borderColor: 'divider',
+  alignItems: 'center',
+  ml: 2,
+  pl: 0.5,
+  pr:0.5
+} as const;
 
 function App() {
 
@@ -54,7 +66,11 @@ function App() {
     [mode],
   );
 
-  const navBarColor = (mode === 'light' ? '#fff' : 'rgb(19, 47, 76, 0.60)')
+  const navBarColor = (mode === 'light' ? 'rgba(255,255,255,0.8)' : 'rgba(10, 25, 41, 0.72)')
+
+  // const githubNewTab = (url: string | URL | undefined) => {
+  //   window.open(url, '_blank', 'noopener, norefferer');
+  // };
 
 
   {/* {themeSet.palette.mode} mode */ }
@@ -70,42 +86,70 @@ function App() {
             boxShadow: 'none',
             borderBottom: 1,
             borderColor: 'divider',
+            backgroundImage: 'none',
           }}
         >
-          <Container>
-            <Box sx={navBarStyle} maxWidth='lg'>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  borderRadius: '10px',
-                  border: 1,
-                  borderColor: 'divider'
-                }}>
-                <IconButton color="primary" size='small'
-                  onClick={colorModeSet.toggleColorMode}>
-                  {themeSet.palette.mode === 'dark' ?
-                    <LightModeOutlinedIcon fontSize='small' /> :
-                    <DarkModeOutlinedIcon fontSize='small' />}
-                </IconButton>
-              </Box>
-              <Box>
-                <ResponsiveAppBar />
+          <Container sx={{
+          }}>
+            <Box sx={navBarStyle} maxWidth='lg'
+            >
+              <ResponsiveAppBar />
+              <Box sx = {{
+                display: 'inline-flex',
+                justifyContent: 'space-evenly',
+                flexDirection: 'row-reverse'
+              }}>
+                <Box
+                  sx={customButtonStyle}>
+                  <IconButton color="primary" size='small'
+                    onClick={colorModeSet.toggleColorMode}>
+                    {themeSet.palette.mode === 'dark' ?
+                      <DarkModeOutlinedIcon fontSize='small' /> :
+                      <LightModeOutlinedIcon fontSize='small' />}
+                  </IconButton>
+                </Box>
+                <Box
+                  sx={customButtonStyle}>
+                  <a href='https://github.com/tssuba/project-carbon-net-zero/' target='_blank' rel='noreferrer'>
+                  <IconButton color="primary" size='small'
+                    // onClick={() => githubNewTab('https://github.com/tssuba/project-carbon-net-zero/')}
+                    >
+                      <GitHubIcon />
+                  </IconButton>
+                  </a>
+                </Box>
               </Box>
             </Box>
           </Container>
         </AppBar>
-        {/* <Box
-          sx={{
-            width: 300,
-            height: 300,
-            backgroundColor: 'background.paper',
-            '&:hover': {
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}
-        /> */}
+        <Toolbar />
+        <main>
+          <Box>
+            <Container maxWidth='lg'>
+              {/* <Paper> */}
+              <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={4} sm={4} md={6}>
+                  <Box 
+                  style={{transition: theme.transitions.create("all", {
+                    easing: theme.transitions.easing.sharp, 
+                    duration: theme.transitions.duration.leavingScreen
+             })}}
+                  // alignItems='flex-end'
+                  sx = {{
+                    display: 'flex',
+                    minHeight: '65vh',
+                    bgcolor: 'secondary.light'
+                  }}>
+                    
+                    <IntroBody/>
+                    
+                  </Box>
+                </Grid>
+              </Grid>
+              {/* </Paper> */}
+            </Container>
+          </Box>
+        </main>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
