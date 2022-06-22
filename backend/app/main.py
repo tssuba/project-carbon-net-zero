@@ -16,7 +16,7 @@ services.create_database()
 app = FastAPI(
     title="Carbon Net Zero",
 )
-
+TIME_INTERVAL = 24 * 60 * 60 # 
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,7 +38,7 @@ db = SessionLocal()
 
 
 @app.on_event("startup")
-@repeat_every(seconds=500)  # every 30 minutes
+@repeat_every(seconds=TIME_INTERVAL)  # once every day and on application start up.
 async def fetch_articles_task():
     services.create_database()
     await services.fetch_articles(db=db, articles=google_scaper.scrape_articles())
@@ -46,7 +46,7 @@ async def fetch_articles_task():
 
 
 @app.on_event("startup")
-@repeat_every(seconds=500)  # every 30 minutes
+@repeat_every(seconds=TIME_INTERVAL)  # once every day and on application start up.
 async def fetch_tweets():
     services.create_database()
     await services.fetch_tweetIds(db=db, articles=twitter_scaper.scrape_twitter())
@@ -54,7 +54,7 @@ async def fetch_tweets():
 
 
 @app.on_event("startup")
-@repeat_every(seconds=500)  # every 30 minutes
+@repeat_every(seconds=TIME_INTERVAL)  # once every day and on application start up.
 async def fetch_research_articles():
     services.create_database()
     await services.fetch_research_articles(
