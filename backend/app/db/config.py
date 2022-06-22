@@ -7,9 +7,6 @@ DB_PORT = os.environ.get("DB_PORT")     #if os.environ.get("DB_PORT") else "5432
 DB_NAME = os.environ.get("DB_NAME")     #if os.environ.get("DB_NAME") else "primer_db"
 
 
-
 SQLALCHEMY_DATABASE_URL = (
     f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
-
-

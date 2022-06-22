@@ -1,4 +1,4 @@
-import pydantic as pydantic
+import pydantic
 from typing import Optional
 
 class ArticleBase(pydantic.BaseModel):
