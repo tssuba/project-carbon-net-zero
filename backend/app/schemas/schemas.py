@@ -19,18 +19,18 @@ class Article(ArticleBase):
         orm_mode = True
 
 
-class _ResearchArticleBase(pydantic.BaseModel):
+class ResearchArticleBase(pydantic.BaseModel):
     published_date:Optional[str] = None
     doi:Optional[str] = None
     publisher:Optional[str] = None
     title:Optional[str] = None
 
 
-class ResearchArticleCreate(_ResearchArticleBase):
+class ResearchArticleCreate(ResearchArticleBase):
     pass
 
 
-class ResearchArticle(_ResearchArticleBase):
+class ResearchArticle(ResearchArticleBase):
     id: int
 
     class Config:
