@@ -13,4 +13,3 @@ COPY ./prod_requirements.txt /prod_requirements.txt
 RUN pip install -r /prod_requirements.txt \
     && rm -rf /root/.cache/pip
 
-# COPY . /app/

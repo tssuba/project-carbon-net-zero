@@ -1,4 +1,4 @@
-FROM node:14-bullseye-slim as stage-1
+FROM node:16-bullseye-slim as stage-1
 
 RUN apt update && apt install -y git
 
@@ -15,7 +15,7 @@ RUN npm run build
 
 # Stage 2 : Deploy the build using nginx
 
-FROM nginx:1.21.6-alpine
+FROM nginx:1.18.0-alpine
 
 COPY --from=stage-1 /app/build /usr/share/nginx/html
 
