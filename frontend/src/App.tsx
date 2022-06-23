@@ -10,6 +10,7 @@ import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import ResponsiveAppBar from './components/navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import "@fontsource/ibm-plex-sans";
 
 import IntroBody from './components/intro';
 
@@ -43,6 +44,23 @@ const customButtonStyle = {
   pr:0.5
 } as const;
 
+const styles = {
+  customizeToolbar: {
+    minHeight: '50px',
+    display: 'inline-flex'
+  }
+};
+
+// const greyButtonDark = {
+//   fontFamily: 'IBM Plex Sans',
+//   fontWeight: '600',
+//   fontSize: 'small',
+//   bordercolor: 'rgb(51, 153, 255)',
+//   color: 'grey.500',
+//   bgcolor: 'rgb(23, 58, 94)',
+//   textTransform:'none'
+// }
+
 function App() {
 
   const theme = useTheme();
@@ -66,7 +84,7 @@ function App() {
     [mode],
   );
 
-  const navBarColor = (mode === 'light' ? 'rgba(255,255,255,0.8)' : 'rgba(10, 25, 41, 0.72)')
+  const navBarColor = (mode === 'light' ? 'rgba(255,255,255,0.8)' : 'rgba(10, 25, 41, 0.72)');
 
   // const githubNewTab = (url: string | URL | undefined) => {
   //   window.open(url, '_blank', 'noopener, norefferer');
@@ -122,28 +140,44 @@ function App() {
             </Box>
           </Container>
         </AppBar>
-        <Toolbar />
+        <Toolbar style={styles.customizeToolbar}/>
         <main>
           <Box>
             <Container maxWidth='lg'>
               {/* <Paper> */}
-              <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid container columns={{ xs: 4, sm: 4, md: 12 }}>
                 <Grid item xs={4} sm={4} md={6}>
                   <Box 
                   style={{transition: theme.transitions.create("all", {
                     easing: theme.transitions.easing.sharp, 
                     duration: theme.transitions.duration.leavingScreen
-             })}}
-                  // alignItems='flex-end'
+                  })}}
+                  alignItems='center'
                   sx = {{
                     display: 'flex',
-                    minHeight: '65vh',
-                    bgcolor: 'secondary.light'
+                    minHeight: '85vh',
+                    // maxHeight: '1000px'
+                    // bgcolor: 'secondary.light'
                   }}>
-                    
-                    <IntroBody/>
-                    
+                    {/* <Stack> */}
+                      <IntroBody/>
+                    {/* </Stack> */}
                   </Box>
+                </Grid>
+                <Grid item xs={4} sm={4} md={6} >
+                <Box 
+                  style={{transition: theme.transitions.create("all", {
+                    easing: theme.transitions.easing.sharp, 
+                    duration: theme.transitions.duration.leavingScreen
+                  })}}
+                  alignItems='center'
+                  sx = {{
+                    display: 'flex',
+                    minHeight: '85vh',
+                    bgcolor: 'secondary.light',
+                    // maxHeight: '100px'
+                  }}>
+                    </Box>
                 </Grid>
               </Grid>
               {/* </Paper> */}
@@ -156,3 +190,7 @@ function App() {
 }
 
 export default App;
+
+function calc(arg0: number, arg1: number, px: any) {
+  throw new Error('Function not implemented.');
+}

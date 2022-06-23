@@ -3,6 +3,10 @@ import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/ibm-plex-sans";
+
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 import { PaletteMode } from '@mui/material';
 
@@ -10,11 +14,12 @@ import { PaletteMode } from '@mui/material';
 import { red, green, blue } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { Height } from '@mui/icons-material';
+import { Container } from '@mui/system';
 
 
 const Root = styled('div')(({ theme }) => ({
     padding: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
         textAlign: 'center',
     },
     [theme.breakpoints.up('md')]: {
@@ -25,7 +30,7 @@ const Root = styled('div')(({ theme }) => ({
     },
   }));
 
-  const styles = {
+const styles = {
     customizeTyporaphy: {
         backgroundImage: "-webkit-linear-gradient(left, #007FFF, #0059B2)",
         WebkitBackgroundClip: "text",
@@ -56,26 +61,22 @@ const IntroBody = () => {
 
     const curTheme = useTheme();
 
+    const greyButtonDark = {
+        fontFamily: 'IBM Plex Sans',
+        fontWeight: '600',
+        fontSize: 'small',
+        bordercolor: 'rgb(51, 153, 255)',
+        color: 'grey.500',
+        bgcolor: 'rgb(23, 58, 94)',
+        textTransform:'none'
+      }
+
 
     return (
-        <Box sx = {{
-            // display: 'flex',
-            bgcolor:'primary.light',
-            alignSelf: 'center',
-            minheight: '100%'
-            // height: 'flex'
-            // marginBottom: '20px'
+        <Root sx = {{
+            // bgcolor: 'secondary.light'
         }}>
-        <>
-        <Root>
-        <Box
-            bgcolor='primary.dark'
-            // height='500px'
-            // alignContent='center'
-            // paddingBottom='100%'
-            >
         <Typography
-        alignSelf='center'
         marginBottom='20px'
             variant='h1'
             style={styles.customizeTyporaphy}
@@ -92,10 +93,59 @@ const IntroBody = () => {
                 {' '}Primer
             </span>
         </Typography >
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+        MUI offers a comprehensive suite of UI tools to help 
+        you ship new features faster. Start with Material UI, 
+        our fully-loaded component library, or bring your own 
+        design system to our production-ready components.
+        </Typography>
+        <Box alignSelf='center'>
+        <Button 
+        variant="contained" 
+        size='large'
+        sx = {{
+            // fontFamily: 'IBM Plex Sans',
+            // fontWeight: '600',
+            // fontSize: 'large',
+            // bgcolor: 'primary.main',
+            // textTransform: 'none'
+            fontFamily: 'IBM Plex Sans',
+            fontWeight: '600',
+            fontSize: 'medium',
+            bordercolor: 'rgb(51, 153, 255)',
+            color: 'grey.500',
+            bgcolor: 'rgb(23, 58, 94)',
+            textTransform:'none',
+            mr: '10px'
+        }}
+        >
+            Get Started {'>'}
+        </Button>
+        <Button 
+        // style={styles.customizeButton}
+        variant="outlined"
+        size='large'
+        sx = {{
+             fontFamily: 'IBM Plex Sans',
+            fontWeight: '600',
+            fontSize: 'medium',
+            bordercolor: 'rgb(51, 153, 255)',
+            color: 'grey.500',
+            bgcolor: 'rgb(23, 58, 94)',
+            textTransform:'none'
+        }}
+        >
+            Outlined
+        </Button>
+
         </Box>
         </Root>
-        </>
-        </Box>
     );
 
 };
