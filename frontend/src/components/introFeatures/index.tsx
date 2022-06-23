@@ -5,6 +5,10 @@ import Stack from '@mui/material/Stack';
 import { Container, minHeight } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import { Avatar, Typography } from '@mui/material';
+import NewspaperRoundedIcon from '@mui/icons-material/NewspaperRounded';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 const IntroFeatures = () => {
 
@@ -27,6 +31,7 @@ const IntroFeatures = () => {
           [curTheme.breakpoints.down('md')]: {
           },
         bgcolor: darkerBg,
+        // overflow: 'hidden'
     }}
         >
             <Box sx = {{
@@ -48,23 +53,93 @@ const IntroFeatures = () => {
                   alignItems="center"
                   justifyContent="center"
                 sx = {{
-                    // mx: 'auto',
+                    // maxWidth: '360px',
                     pt: 4,
                 }}
                 >
-                    <Grid item xs={4} sm={4} md={6}>
-                        <Stack spacing={10}>
+                    <Grid item xs={4} sm={4} md={6} sx = {{
+                    }}>
+                        <Stack spacing={10} sx = {{
+                            [curTheme.breakpoints.up('md')]: {maxWidth: '360px'}}}>
                     <Card sx = {{
                         borderRadius: '10px',
-                        minWidth: '360px',
+                        // maxWidth: '360px',
                         padding: '25px',
                         display: 'flex',
                         flexDirection: 'column',
+                        // selfAlign: 'center',
                         backgroundImage: '-webkit-linear-gradient(left top, rgb(0, 127, 255), rgb(0, 89, 178) 120%)',
                         // justifySelf: 'center',
 
                         minHeight: '250px'
-                    }}></Card>
+                    }}>
+                        <Box sx = {{
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}>
+
+
+                                <ScheduleIcon sx = {{
+                                    mr: 2,
+                                    color: '#fff',
+                                    fontSize: 'medium'
+                                    }} /> 
+                                    <Typography color='#fff'
+                                    sx = {{ fontSize: '',
+                                fontWeight: '400'}}
+                                    >
+                                    {' June 23rd ' }
+                                    </Typography>
+                                </Box>
+                                <Box>                                   
+                                <NewspaperRoundedIcon
+                                fontSize='large'
+                                sx = {{
+                                    mt: 2,
+                                    // bgcolor: '#fff',
+                                    color: '#fff',
+                                    borderRadius: '7px'
+                                }} />
+                                <Box sx = {{
+                                    display: 'flex',
+                                    mb: 2
+                                }}>
+                                <Typography sx = {{
+                                    fontFamily: 'IBM Plex Sans',
+                                    color: '#fff',
+                                    fontWeight: '600',
+                                    fontSize: 'large',
+                                    // width: '100%'
+                                }}>
+                                IGI Delhi becomes India{'’'}s 
+                                first airport to run entirely on solar and hydro energy
+                                </Typography> 
+                                
+                                </Box>
+                                <Stack direction='row' spacing={2}>
+                                <Avatar variant="rounded" src="https://logo.clearbit.com/timesnownews.com?size=128" />
+                                {/* <img src = 'https://logo.clearbit.com/timesnownews.com?size=' width={48}/> */}
+                                <Stack>
+                                <Typography fontSize='small' sx = {{
+                                    color: 'grey.300'
+                                }}>
+                                    Published by
+                                </Typography>
+                                <Typography fontSize='small' fontWeight='600' sx = {{
+                                    color: '#fff'
+                                }}>
+                                    The Times of India
+                                </Typography>
+                                </Stack>
+                                
+                                </Stack>
+                                <Box>
+
+                                </Box>
+                                
+
+                        </Box>
+                    </Card>
                     <Box bgcolor='#000'
                     minHeight = '250px'
                     minWidth = '250px'
@@ -76,13 +151,13 @@ const IntroFeatures = () => {
                     
                     <Grid item xs={4} sm={4} md={6}>
                     <Stack spacing={10}>
-                    <Box bgcolor='#000'
+                    {/* <Box bgcolor='#000'
                     minHeight = '250px'
                     minWidth = '250px'
                     >
                         
-                    </Box>
-
+                    </Box> */}
+                    <TwitterTweetEmbed tweetId='1539913505641480198' />
                     <Card sx = {{
                         borderRadius: '10px',
                         minWidth: '360px',

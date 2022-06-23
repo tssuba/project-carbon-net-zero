@@ -178,13 +178,16 @@ function App() {
                     duration: theme.transitions.duration.leavingScreen
                   })}}
                   alignItems='flex-start'
-                  justifyItems='center'
+                  // justifyItems='left'
                   // overflow='scroll'
                   sx = {{
                     display: 'flex',
                     height: 'calc(100vh - 120px)',
                     maxHeight: '1000px',
+                    // width: '2000px',
                     bgcolor: 'secondary.light',
+                    // overflowY: 'hidden',
+                    // overflowX: 'auto'
                     // minHeight: '600px'
                   }}>
                       <IntroFeatures />
