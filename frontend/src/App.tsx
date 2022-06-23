@@ -13,6 +13,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
 
 import IntroBody from './components/intro';
+import IntroFeatures from './components/introFeatures';
 
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
@@ -145,20 +146,26 @@ function App() {
           <Box>
             <Container maxWidth='lg'>
               {/* <Paper> */}
-              <Grid container columns={{ xs: 4, sm: 4, md: 12 }}>
+              <Grid container columns={{ xs: 4, sm: 4, md: 12 }} spacing={10}>
                 <Grid item xs={4} sm={4} md={6}>
                   <Box 
                   style={{transition: theme.transitions.create("all", {
                     easing: theme.transitions.easing.sharp, 
                     duration: theme.transitions.duration.leavingScreen
-                  })}}
+                  }), 
+                  // minHeight: '-webkit-calc(100vh-120px)'
+                }}
                   alignItems='center'
                   sx = {{
                     display: 'flex',
-                    minHeight: '85vh',
+                    height: 'calc(100vh - 120px)',
+                    maxHeight: '1000px'
+                    // minHeight: 'calc(100vh - 120px)',
+                    // maxHeight: 'calc(100vh - 120px)',
                     // maxHeight: '1000px'
                     // bgcolor: 'secondary.light'
-                  }}>
+                  }}
+                  >
                     {/* <Stack> */}
                       <IntroBody/>
                     {/* </Stack> */}
@@ -170,13 +177,18 @@ function App() {
                     easing: theme.transitions.easing.sharp, 
                     duration: theme.transitions.duration.leavingScreen
                   })}}
-                  alignItems='center'
+                  alignItems='flex-start'
+                  justifyItems='center'
+                  // overflow='scroll'
                   sx = {{
                     display: 'flex',
-                    minHeight: '85vh',
+                    height: 'calc(100vh - 120px)',
+                    maxHeight: '1000px',
                     bgcolor: 'secondary.light',
-                    // maxHeight: '100px'
+                    // minHeight: '600px'
                   }}>
+                      <IntroFeatures />
+                      
                     </Box>
                 </Grid>
               </Grid>

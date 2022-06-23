@@ -119,8 +119,8 @@ const IntroBody = () => {
             fontWeight: '600',
             fontSize: 'medium',
             bordercolor: 'rgb(51, 153, 255)',
-            color: 'grey.500',
-            bgcolor: 'rgb(23, 58, 94)',
+            // color: 'grey.500',
+            bgcolor: 'primary',
             textTransform:'none',
             mr: '10px'
         }}
@@ -135,9 +135,10 @@ const IntroBody = () => {
              fontFamily: 'IBM Plex Sans',
             fontWeight: '600',
             fontSize: 'medium',
-            bordercolor: 'rgb(51, 153, 255)',
-            color: 'grey.500',
-            bgcolor: 'rgb(23, 58, 94)',
+            // bordercolor: '#CDD2D7',
+            // color: '#2D3843',
+
+            // bgcolor: 'rgb(194, 224, 255)',
             textTransform:'none'
         }}
         >
