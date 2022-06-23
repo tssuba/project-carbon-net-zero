@@ -1,3 +1,3 @@
-import axiosInstance from "./axiosAPI.ts";
+import axiosInstance from "./axiosAPI";
 
 export default axiosInstance;

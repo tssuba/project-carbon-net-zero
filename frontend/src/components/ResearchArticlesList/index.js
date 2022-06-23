@@ -1,3 +1,3 @@
-import JournalsList from "./ResearchArticlesList.tsx";
+import JournalsList from "./ResearchArticlesList";
 
 export default JournalsList;

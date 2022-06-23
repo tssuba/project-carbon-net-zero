@@ -1,3 +1,3 @@
-import NewsList from "./NewsList.tsx";
+import NewsList from "./NewsList";
 
 export default NewsList;

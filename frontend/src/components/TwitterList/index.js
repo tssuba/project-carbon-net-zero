@@ -1,3 +1,3 @@
-import TweetsList from "./TwitterList.tsx";
+import TweetsList from "./TwitterList";
 
 export default TweetsList;
