@@ -20,7 +20,7 @@
 
 ## Api documentation:
 
-- url: http://localhost:8000/docs
+- url: http://api.localhost/docs
 
 ## Setting Things up.
 
