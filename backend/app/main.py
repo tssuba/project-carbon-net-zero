@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 
 from routes.api import router
 from crud import services
@@ -28,6 +29,22 @@ app.add_middleware(
 
 # add the router to the app
 app.include_router(router)
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="IITM | Carbon Net Zero",
+        version="0.0.1",
+        description="IITM | Carbon Net Zero's OpenAPI schema",
+        routes=app.routes,
+    )
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 query = "Carbon Net Zero"
 google_scaper = GoogleNewsScraper(query)
