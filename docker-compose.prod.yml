@@ -33,7 +33,7 @@ services:
       - ./backend/app/.env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.example.com`) && PathPrefix(`/api`,`/docs`)"
+      - "traefik.http.routers.backend.rule=Host(`api.${DOMAIN}`) && PathPrefix(`/api`,`/docs`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=myhttpchallenge"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
@@ -56,7 +56,7 @@ services:
       - backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`example.com`)"
+      - "traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)"
       #- "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myhttpchallenge"
@@ -82,7 +82,7 @@ services:
       - 443:443
     command:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.swarmMode=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik_network"
@@ -95,7 +95,7 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.myhttpchallenge.acme.email=info@example.com"
+      - "--certificatesresolvers.myhttpchallenge.acme.email=${CERT_RESOLVER_EMAIL}"
       - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
     networks:
       - traefik_network
