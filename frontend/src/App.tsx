@@ -186,8 +186,9 @@ function App() {
                     maxHeight: '1000px',
                     // width: '2000px',
                     bgcolor: 'secondary.light',
-                    // overflowY: 'hidden',
-                    // overflowX: 'auto'
+                    [theme.breakpoints.up('md')]: {width: '1000px',},
+                    overflowY: 'scroll',
+                    // overflowX: 'initial'  
                     // minHeight: '600px'
                   }}>
                       <IntroFeatures />
