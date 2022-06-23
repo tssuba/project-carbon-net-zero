@@ -1,11 +1,13 @@
 FROM node:16-bullseye-slim 
 
-RUN apt update
+WORKDIR /app/
 
-WORKDIR /app
+# Install dependencies
+COPY package.json package-lock.json /app/
 
-COPY package*.json /app/
+RUN npm install
 
-RUN npm install --force
+# Add rest of the client code
+COPY . /app/
 
-COPY . .
+EXPOSE 3000
