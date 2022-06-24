@@ -4,16 +4,13 @@ import Box from '@mui/material/Box';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import getDesignTokens from './theme';
+import getDesignTokens from '../../theme';
 import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import ResponsiveAppBar from './components/navbar';
+import ResponsiveAppBar from '../../components/navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
-
-import IntroBody from './components/intro';
-import IntroFeatures from './components/introFeatures';
 
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
@@ -52,8 +49,17 @@ const styles = {
   }
 };
 
+// const greyButtonDark = {
+//   fontFamily: 'IBM Plex Sans',
+//   fontWeight: '600',
+//   fontSize: 'small',
+//   bordercolor: 'rgb(51, 153, 255)',
+//   color: 'grey.500',
+//   bgcolor: 'rgb(23, 58, 94)',
+//   textTransform:'none'
+// }
 
-function App() {
+function People() {
 
   const theme = useTheme();
 
@@ -134,66 +140,13 @@ function App() {
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
-          <Box>
-            <Container maxWidth='lg'>
-              {/* <Paper> */}
-              <Grid container columns={{ xs: 4, sm: 4, md: 12 }} spacing={10}>
-                <Grid item xs={4} sm={4} md={6}>
-                  <Box 
-                  style={{transition: theme.transitions.create("all", {
-                    easing: theme.transitions.easing.sharp, 
-                    duration: theme.transitions.duration.leavingScreen
-                  }), 
-                  // minHeight: '-webkit-calc(100vh-120px)'
-                }}
-                  alignItems='center'
-                  sx = {{
-                    display: 'flex',
-                    height: 'calc(100vh - 120px)',
-                    maxHeight: '1000px'
-                    // minHeight: 'calc(100vh - 120px)',
-                    // maxHeight: 'calc(100vh - 120px)',
-                    // maxHeight: '1000px'
-                    // bgcolor: 'secondary.light'
-                  }}
-                  >
-                    {/* <Stack> */}
-                      <IntroBody/>
-                    {/* </Stack> */}
-                  </Box>
-                </Grid>
-                <Grid item xs={4} sm={4} md={6} >
-                <Box 
-                  style={{transition: theme.transitions.create("all", {
-                    easing: theme.transitions.easing.sharp, 
-                    duration: theme.transitions.duration.leavingScreen
-                  })}}
-                  alignItems='flex-start'
-                  // justifyItems='left'
-                  // overflow='scroll'
-                  sx = {{
-                    display: 'flex',
-                    height: 'calc(100vh - 120px)',
-                    maxHeight: '1000px',
-                    // width: '2000px',
-                    bgcolor: 'secondary.light',
-                    [theme.breakpoints.up('md')]: {width: '1000px',},
-                    overflowY: 'scroll',
-                    // overflowX: 'initial'  
-                    // minHeight: '600px'
-                  }}>
-                      <IntroFeatures />
-                      
-                    </Box>
-                </Grid>
-              </Grid>
-              {/* </Paper> */}
-            </Container>
-          </Box>
+            <div>
+                dkjfnsjdkfnsdkjfnsdkj
+            </div>
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
 
-export default App;
+export default People;
