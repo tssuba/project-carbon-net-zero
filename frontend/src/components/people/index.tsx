@@ -5,12 +5,17 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from '../../theme';
-import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
+import { CssBaseline, Grid, Paper, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import ResponsiveAppBar from '../../components/navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
+import Stack from '@mui/material/Stack';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
+
+import axiosInstance from '../../utils/AxiosAPI';
+import {useState, useEffect} from "react";
 
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
@@ -59,9 +64,16 @@ const styles = {
 //   textTransform:'none'
 // }
 
+interface TweetIdType {
+  id: number;
+  tweetId: string;
+};
+
 function People() {
 
   const theme = useTheme();
+
+  const curTheme = useTheme();
 
   const colorMode = React.useContext(ColorModeContext);
 
@@ -87,6 +99,17 @@ function People() {
   // const githubNewTab = (url: string | URL | undefined) => {
   //   window.open(url, '_blank', 'noopener, norefferer');
   // };
+
+  const [tweetIds, setTweetIds] = useState<Array<TweetIdType>>([]);
+
+  const getTweetIds = async () => {
+      const { data } = await axiosInstance.get("/tweets");
+      setTweetIds(data);
+  };
+
+  useEffect(() => {
+      getTweetIds();
+  }, []);
 
 
   {/* {themeSet.palette.mode} mode */ }
@@ -140,9 +163,33 @@ function People() {
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
-            <div>
-                dkjfnsjdkfnsdkjfnsdkj
+          <Container maxWidth = 'lg'>
+            <Box 
+            // bgcolor='rgba(0,0,0,0.5)' 
+            // display= 'flex'
+            width='550px'
+            sx = {{
+            [curTheme.breakpoints.down('sm')]: {
+              width: '300px',
+              mx: 'auto'
+            },
+             mx:'auto'
+            }}
+            >
+              <Stack sx = {{
+              }}>
+          {tweetIds.map((tweetId) => (
+            <div style={{
+              // width:'100%', 
+              justifyContent:'center'}}
+              key={tweetId.id}>
+                <TwitterTweetEmbed tweetId={tweetId.tweetId} />
             </div>
+          ))}
+              </Stack>
+            </Box>
+          </Container>
+           
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>

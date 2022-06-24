@@ -69,9 +69,9 @@ const ResponsiveAppBar = () => {
           // variant = 'dense'
           style={styles.customizeToolbar}
           disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,
           color: 'primary.main'
-          }} />
+          }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -132,8 +132,8 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon color= 'primary'
-          sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <AdbIcon color= 'primary'
+          sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -202,7 +202,7 @@ const ResponsiveAppBar = () => {
                   textTransform: 'none',
                   // typography: 'body3'
                 }}>
-                People
+                Twitter
               </Button>
           </Box>
 

@@ -42,6 +42,7 @@ services:
 
   frontend:
     container_name: frontend
+    stdin_open: true
     build:
       context: ./frontend
       dockerfile: frontend.dockerfile

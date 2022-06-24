@@ -5,7 +5,7 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from '../../theme';
-import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
+import { CssBaseline, Grid, Paper, Stack, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import ResponsiveAppBar from '../navbar';
@@ -17,6 +17,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import NewspaperRoundedIcon from '@mui/icons-material/NewspaperRounded';
 
 import axiosInstance from '../../utils/AxiosAPI';
 import {useState, useEffect} from "react";
@@ -114,6 +115,7 @@ function News() {
         getNewsArticles();
     }, []);
 
+    const reversedKeys = Object.keys(newsArticles).reverse();
 
   return (
     <ColorModeContext.Provider value={colorModeSet}>
@@ -165,9 +167,31 @@ function News() {
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
-        <Container maxWidth='lg'>
-        <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Container maxWidth='lg' sx = {{ pt: 2}}>
+
+          <h1>
+            <Stack direction='row'>
+            <span>
+            <NewspaperRoundedIcon sx = {{
+            fontSize: '2rem',
+            pt: 1.5
+            }}/>
+              </span> 
+              <span> | News</span>
+              {/* <Typography sx = {{mt: 2, ml: 2}}>
+                blah blah blah
+              </Typography> */}
+              </Stack>
+          </h1>
+
+        <TableContainer component={Paper} sx = {{
+          height: 'calc(100vh - 200px)',
+          maxHeight: '1000px'
+        }}>
+      <Table  stickyHeader 
+      sx={{ minWidth: 650, bgcolor:'background.paper',
+    border: 1, borderColor: 'divider'
+    }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Title</TableCell>

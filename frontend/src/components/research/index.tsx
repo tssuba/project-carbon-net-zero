@@ -5,12 +5,22 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from '../../theme';
-import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
+import { CssBaseline, Grid, Paper, Stack, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import ResponsiveAppBar from '../../components/navbar';
+import ResponsiveAppBar from '../navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
+import axiosInstance from '../../utils/AxiosAPI';
+import {useState, useEffect} from "react";
 
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
@@ -59,6 +69,16 @@ const styles = {
 //   textTransform:'none'
 // }
 
+
+interface ResearchArticleType {
+  id: number;
+  // link: string;
+  title: string;
+  publisher: string;
+  published_date: string;
+}
+
+
 function Research() {
 
   const theme = useTheme();
@@ -83,15 +103,21 @@ function Research() {
   );
 
   const navBarColor = (mode === 'light' ? 'rgba(255,255,255,0.8)' : 'rgba(10, 25, 41, 0.72)');
+  
+  const [researchArticles, setResearchArticles] = useState<Array<ResearchArticleType>>([]);
 
-  // const githubNewTab = (url: string | URL | undefined) => {
-  //   window.open(url, '_blank', 'noopener, norefferer');
-  // };
+    const getResearchArticles = async () => {
+        const { data } = await axiosInstance.get("/research");
+        setResearchArticles(data);
+    };
+
+    useEffect(() => {
+        getResearchArticles();
+    }, []);
 
 
-  {/* {themeSet.palette.mode} mode */ }
   return (
-    <ColorModeContext.Provider value={colorModeSet}>
+<ColorModeContext.Provider value={colorModeSet}>
       <ThemeProvider theme={themeSet}>
         <CssBaseline />
         <AppBar
@@ -140,9 +166,56 @@ function Research() {
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
-            <div>
-                dkjfnsjdkfnsdkjfnsdkj
-            </div>
+        <Container maxWidth='lg' sx = {{ pt: 2}}>
+
+          <h1>
+            <Stack direction='row'>
+            <span>
+            <LibraryBooksIcon sx = {{
+            fontSize: '2rem',
+            pt: 1.5
+            }}/>
+              </span> 
+              <span> | Research</span>
+              {/* <Typography sx = {{mt: 2, ml: 2}}>
+                blah blah blah
+              </Typography> */}
+              </Stack>
+          </h1>
+
+        <TableContainer component={Paper} sx = {{
+          height: 'calc(100vh - 200px)',
+          maxHeight: '1000px'
+        }}>
+      <Table  stickyHeader 
+      sx={{ minWidth: 650, bgcolor:'background.paper',
+    border: 1, borderColor: 'divider'
+    }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell align="right">Publisher</TableCell>
+            <TableCell align="right">Date</TableCell>
+          </TableRow>
+        </TableHead>    
+
+        <TableBody>
+          {researchArticles.map((researchArticle) => (
+            <TableRow
+              key={researchArticle.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {researchArticle.title}
+              </TableCell>
+              <TableCell align="right">{researchArticle.publisher}</TableCell>
+              <TableCell align="right">{researchArticle.published_date}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+        </Container>
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>

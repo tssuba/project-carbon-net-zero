@@ -100,12 +100,11 @@ const IntroBody = () => {
         color={curTheme.palette.mode === 'light' ?
         '#3E5060' : 'rgb(178, 186, 194)'}
         >
-        MUI offers a comprehensive suite of UI tools to help 
-        you ship new features faster. Start with Material UI, 
-        our fully-loaded component library, or bring your own 
-        design system to our production-ready components.
+            Net-zero is a scientific concept whose objective is to keep the global average temperatures
+within a certain limit by applying constraints on the amount of carbon dioxide that can be
+present in earth's atmosphere at any given point of time.
         </Typography>
-        <Box alignSelf='center'>
+        {/* <Box alignSelf='center'>
         <Button 
         variant="contained" 
         size='large'
@@ -145,7 +144,7 @@ const IntroBody = () => {
             Outlined
         </Button>
 
-        </Box>
+        </Box> */}
         </Root>
     );
 
