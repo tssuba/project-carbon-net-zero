@@ -45,6 +45,10 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
     navigate("/news");
   };
+  const handleCloseNavMenuB = () => {
+    setAnchorElNav(null);
+    navigate("/briefing");
+  };
   const handleCloseNavMenuN = () => {
     setAnchorElNav(null);
     navigate("/news");
@@ -152,6 +156,23 @@ const ResponsiveAppBar = () => {
           >
             IITM
           </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Button
+                onClick={handleCloseNavMenuB}
+                // size='small'
+                sx={{ 
+                  // my: 2, 
+                  color: 'text.primary', 
+                  display: 'block' ,
+                  fontWeight: '600',
+                  // fontFamily: 'Plus Jakarta Sans',
+                  // fontSize: 'small',
+                  textTransform: 'none',
+                  // typography: 'body3'
+                }}>
+                Briefing
+              </Button>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 onClick={handleCloseNavMenuN}

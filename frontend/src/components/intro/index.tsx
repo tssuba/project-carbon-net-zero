@@ -5,6 +5,13 @@ import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import "@fontsource/plus-jakarta-sans/700.css";
 import "@fontsource/ibm-plex-sans";
 
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import TwitterIcon from '@mui/icons-material/Twitter';
+
+
+import Carousel from 'nuka-carousel';
+
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
@@ -16,6 +23,8 @@ import { styled } from '@mui/material/styles';
 import { Height } from '@mui/icons-material';
 import { Container } from '@mui/system';
 
+import { Link , Navigate, useNavigate} from 'react-router-dom'
+
 
 const Root = styled('div')(({ theme }) => ({
     padding: theme.spacing(1),
@@ -23,10 +32,10 @@ const Root = styled('div')(({ theme }) => ({
         textAlign: 'center',
     },
     [theme.breakpoints.up('md')]: {
-      textAlign: 'left',
+      textAlign: 'center',
     },
     [theme.breakpoints.up('lg')]: {
-        textAlign: 'left',
+        textAlign: 'center',
     },
   }));
 
@@ -59,6 +68,21 @@ const styles = {
 
 const IntroBody = () => {
 
+    let navigate = useNavigate();
+
+    const handleCloseNavMenuN = () => {
+
+        navigate("/news");
+      };
+      const handleCloseNavMenuR = () => {
+
+        navigate("/research");
+      };
+      const handleCloseNavMenuP = () => {
+
+        navigate("/people");
+      };
+
     const curTheme = useTheme();
 
     const greyButtonDark = {
@@ -73,11 +97,14 @@ const IntroBody = () => {
 
 
     return (
-        <Root sx = {{
-            // bgcolor: 'secondary.light'
+
+            <Root sx = {{
+                width: '100%',
+            // bgcolor: 'secondary.light',
         }}>
         <Typography
         marginBottom='20px'
+        marginTop='30px'
             variant='h1'
             style={styles.customizeTyporaphy}
             fontWeight='600'
@@ -85,15 +112,39 @@ const IntroBody = () => {
             fontSize='clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)'
         >
                 Carbon Net Zero
-            <span 
+            {/* <span 
                 style={curTheme.palette.mode === 'light' ?
                 styles.spanColorLight : styles.spanColorDark
             }
                 >
                 {' '}Primer
-            </span>
+            </span> */}
         </Typography >
-        <Typography
+        <Box
+        mx = 'auto' 
+        // bgcolor = '#000'
+        width = '500px'
+        pt = '25px'
+
+        >
+        <Carousel 
+        autoplay = {true}
+        autoplayInterval = {5000}
+        pauseOnHover = {true}
+        wrapAround = {true}
+        speed = {1000}
+        renderCenterLeftControls={({ previousSlide }) => (
+    null
+    )}
+    renderCenterRightControls={({ nextSlide }) => (
+      null
+    )}
+    // renderBottomCenterControls={() => (
+    //   null
+    // )}
+
+  >
+    <Typography
         marginBottom='30px'
         fontFamily='IBM Plex Sans'
         fontWeight='200'
@@ -104,48 +155,115 @@ const IntroBody = () => {
 within a certain limit by applying constraints on the amount of carbon dioxide that can be
 present in earth's atmosphere at any given point of time.
         </Typography>
-        {/* <Box alignSelf='center'>
-        <Button 
-        variant="contained" 
-        size='large'
-        sx = {{
-            // fontFamily: 'IBM Plex Sans',
-            // fontWeight: '600',
-            // fontSize: 'large',
-            // bgcolor: 'primary.main',
-            // textTransform: 'none'
-            fontFamily: 'IBM Plex Sans',
-            fontWeight: '600',
-            fontSize: 'medium',
-            bordercolor: 'rgb(51, 153, 255)',
-            // color: 'grey.500',
-            bgcolor: 'primary',
-            textTransform:'none',
-            mr: '10px'
-        }}
-        >
-            Get Started {'>'}
-        </Button>
-        <Button 
-        // style={styles.customizeButton}
-        variant="outlined"
-        size='large'
-        sx = {{
-             fontFamily: 'IBM Plex Sans',
-            fontWeight: '600',
-            fontSize: 'medium',
-            // bordercolor: '#CDD2D7',
-            // color: '#2D3843',
 
-            // bgcolor: 'rgb(194, 224, 255)',
-            textTransform:'none'
-        }}
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
         >
-            Outlined
-        </Button>
+            Net-zero for a particular country is a state in which a country’s excess carbon dioxide emissions
+are removed from atmosphere by carbon absorption or sequestration
+        </Typography>
 
-        </Box> */}
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Ways to achieve carbon net-zero include cutting down on all emissions as much as we can and
+removing carbon dioxide from the atmosphere by carbon sequestration and absorption
+        </Typography>
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Carbon net-zero can also be viewed as a framework through which global action against climate
+change can be undertaken using suitable socio-economic and policy changes.
+        </Typography>
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Large scale deforestation has created a situation where we do not have enough trees to absorb
+all the carbon dioxide that are released. Planting trees offers a simple and effective solution.
+        </Typography>
+        
+        </Carousel>
+        
+
+        </Box>
+
+        <Box sx = {{
+            pt: 10,
+            display:'inline-flex',
+            // bgcolor: '#f0f0f0'
+        }}>
+            <Stack direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 20 }}>
+
+    <Button onClick= {handleCloseNavMenuN}>
+
+    <Stack>
+            
+            <NewspaperOutlinedIcon sx = {{
+                fontSize: '9rem',
+            }} />
+
+<Typography textTransform='none'>
+
+News
+</Typography>
+
+      </Stack>
+
+    </Button>
+
+      <Button onClick= {handleCloseNavMenuR}>
+      <Stack>
+      <LibraryBooksOutlinedIcon sx = {{
+                fontSize: '9rem',
+              //   ml: 20,
+              //   mr: 20,
+            }}/>
+
+            <Typography textTransform='none'>
+
+                Research
+            </Typography>
+
+      </Stack>
+
+      </Button>
+      <Button onClick= {handleCloseNavMenuP}>
+      <Stack>
+            <TwitterIcon sx = {{
+                fontSize: '9rem'
+            }}/>
+            <Typography textTransform='none'>
+                Twitter
+</Typography>
+            </Stack>
+      </Button>
+
+
+            </Stack>
+        
+                 
+        </Box>
+        
+
         </Root>
+        
     );
 
 };

@@ -115,7 +115,7 @@ function News() {
         getNewsArticles();
     }, []);
 
-    const reversedKeys = Object.keys(newsArticles).reverse();
+    const reversedKeys = newsArticles.reverse();
 
   return (
     <ColorModeContext.Provider value={colorModeSet}>
@@ -200,13 +200,22 @@ function News() {
           </TableRow>
         </TableHead>    
         <TableBody>
-          {newsArticles.map((newsArticle) => (
+          {reversedKeys.map((newsArticle) => (
             <TableRow
               key={newsArticle.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {newsArticle.title}
+              <a href={newsArticle.link} 
+              target='_blank' 
+              rel='noreferrer'
+              style={{ textDecoration: 'none',
+              color: 'primary.main' }}
+              >
+                <Typography fontWeight='600'>
+                {newsArticle.title} 
+                </Typography>
+                </a>
               </TableCell>
               <TableCell align="right">{newsArticle.publisher}</TableCell>
               <TableCell align="right">{newsArticle.published_date}</TableCell>

@@ -5,18 +5,36 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from './theme';
-import { CssBaseline, Grid, Paper, Toolbar } from '@mui/material';
+import { CssBaseline, Grid, Paper, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import ResponsiveAppBar from './components/navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import { Carousel } from 'react-responsive-carousel';
+import twitterImg from './twitter.png';
+import researchImg from './Research.png';
+import newsImg from './news.png';
+
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import TwitterIcon from '@mui/icons-material/Twitter';
+
+import StickyFooter from './components/footer';
+
+import Carousel from 'nuka-carousel';
+
+import { useNavigate } from 'react-router-dom'
 
 import IntroBody from './components/intro';
 import IntroFeatures from './components/introFeatures';
 
 
+
+
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
+
 
 
 const navBarStyle = {
@@ -54,6 +72,18 @@ const styles = {
 
 
 function App() {
+
+  let navigate = useNavigate();
+
+  const handleCloseNavMenuN = () => {
+    navigate("/news");
+  };
+  const handleCloseNavMenuR = () => {
+    navigate("/research");
+  };
+  const handleCloseNavMenuP = () => {
+    navigate("/people");
+  };
 
   const theme = useTheme();
 
@@ -137,8 +167,8 @@ function App() {
           <Box>
             <Container maxWidth='lg'>
               {/* <Paper> */}
-              <Grid container columns={{ xs: 4, sm: 4, md: 12 }} spacing={10}>
-                <Grid item xs={4} sm={4} md={6}>
+              {/* <Grid container columns={{ xs: 4, sm: 4, md: 12 }} spacing={10}>
+                <Grid item xs={4} sm={4} md={6}> */}
                   <Box 
                   style={{transition: theme.transitions.create("all", {
                     easing: theme.transitions.easing.sharp, 
@@ -147,21 +177,38 @@ function App() {
                   // minHeight: '-webkit-calc(100vh-120px)'
                 }}
                   alignItems='center'
+                  justifyItems = 'center'
                   sx = {{
                     display: 'flex',
                     height: 'calc(100vh - 120px)',
-                    maxHeight: '1000px'
-                    // minHeight: 'calc(100vh - 120px)',
-                    // maxHeight: 'calc(100vh - 120px)',
-                    // maxHeight: '1000px'
-                    // bgcolor: 'secondary.light'
+                    maxHeight: '1000px',
+                  // bgcolor: '#f0f0f0',
+                  // mx: 'auto',
                   }}
                   >
                     {/* <Stack> */}
+
                       <IntroBody/>
+
+                      
+            {/* <Stack direction='row'> */}
+            
+                  {/* <NewspaperOutlinedIcon sx = {{
+                      fontSize: '9rem',
+                  }} />
+                  <LibraryBooksOutlinedIcon sx = {{
+                      fontSize: '9rem',
+                      ml: 20,
+                      mr: 20,
+                  }}/>
+                  <TwitterIcon sx = {{
+                      fontSize: '9rem'
+                  }}/> */}
+
+            {/* </Stack> */}
                     {/* </Stack> */}
                   </Box>
-                </Grid>
+                {/* </Grid>
                 <Grid item xs={4} sm={4} md={6} >
                 <Box 
                   style={{transition: theme.transitions.create("all", {
@@ -186,14 +233,92 @@ function App() {
                       
                     </Box>
                 </Grid>
-              </Grid>
+              </Grid> */}
               {/* </Paper> */}
+            
+                    {/* </Box> */}
             </Container>
+
+
           </Box>
         </main>
+        {/* <StickyFooter /> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
 
 export default App;
+
+// Bottom Carousel
+
+/*  <Box sx = {{ padding: '50px'}} />
+              <Box sx = {{
+              pt : '5',
+              minWidth: '100px',
+              minHeight: '100px',
+              // bgcolor: '#000'
+            }}></Box>
+            <Box>
+            <Carousel 
+                    autoplay = {true}
+                    autoplayInterval = {6000}
+                    pauseOnHover = {true}
+                    wrapAround = {true}
+                    speed = {1000}
+            renderCenterLeftControls={({ previousSlide }) => (
+    null
+    )}
+    renderCenterRightControls={({ nextSlide }) => (
+      null
+    )}
+    // renderBottomCenterControls={() => (
+    //   null
+    // )}
+
+  >
+              <Box sx = {{ mx: 'auto', width: '850px'}}>
+                <Box width= '100%' 
+                // bgcolor= '#f0f0f0' 
+                justifyContent = 'center'
+                display='flex'
+                >
+                <Typography sx = {{
+                  mx: 'auto', 
+                  justifySelf: 'center',
+                  fontSize: 'large',
+                  fontWeight: '600'
+                  }}> News </Typography>
+                </Box>
+                <img src={newsImg} style={{cursor:'pointer'}} onClick = {handleCloseNavMenuN}/>
+                </Box>
+              <Box sx = {{ mx: 'auto', width: '800px'}}>
+              <Box width= '100%' 
+                justifyContent = 'center'
+                display='flex'
+                >
+                <Typography sx = {{
+                  mx: 'auto', 
+                  justifySelf: 'center',
+                  fontSize: 'large',
+                  fontWeight: '600'
+                  }}> Research </Typography>
+                </Box>
+                <img src={researchImg} style={{cursor:'pointer'}} onClick = {handleCloseNavMenuR}/>
+                </Box>
+              <Box sx = {{ mx: 'auto', width: '500px'}}>
+              <Box width= '100%'  
+                justifyContent = 'center'
+                display='flex'
+                >
+                <Typography sx = {{
+                  mx: 'auto', 
+                  justifySelf: 'center',
+                  fontSize: 'large',
+                  fontWeight: '600',
+                  pb: 4,
+                  }}> Social Networking </Typography>
+                </Box>
+                <img src={twitterImg} style={{cursor:'pointer'}} onClick = {handleCloseNavMenuP} /></Box>
+                    </Carousel>
+            </Box> */

@@ -206,7 +206,10 @@ function Research() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
+                <Typography fontWeight='600'>
                 {researchArticle.title}
+                </Typography>
+                
               </TableCell>
               <TableCell align="right">{researchArticle.publisher}</TableCell>
               <TableCell align="right">{researchArticle.published_date}</TableCell>

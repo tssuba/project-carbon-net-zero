@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import News from './components/news';
 import Research from './components/research';
 import People from './components/people';
+import Briefing from './components/briefing';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +19,7 @@ root.render(
       <Route path="news" element={<News />} />
       <Route path="research" element={<Research />} />
       <Route path="people" element={<People />} />
+      <Route path="briefing" element={<Briefing />} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

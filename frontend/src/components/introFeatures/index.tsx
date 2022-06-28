@@ -220,6 +220,22 @@ const IntroFeatures = () => {
                     <Grid item xs={4} sm={4} md={6} justifyItems= 'center'>
                     <Stack spacing={5}>
 
+                    <Box sx = {{
+                        // [curTheme.breakpoints.down('md')]: {minWidth: '100%'},
+                        // bgcolor: 'rgba(0,0,0,0.5)',
+                        [curTheme.breakpoints.down('md')]: {
+                        // bgcolor: '#000',
+                        // pl: '12%',
+                        // pr: '50%',
+                        justifyContent: 'center',
+                        justifyItems: 'center',
+                        mx: 'auto'
+
+                    }
+                    }}>
+                    <TwitterTweetEmbed tweetId='1541346221373128707' />
+                    </Box>
+
                         <Box sx = {{
                             bgcolor: 'background.default',
                             height: '300px',
@@ -304,7 +320,7 @@ const IntroFeatures = () => {
 
                         </Box>
                     </Card>
-                    <Card sx = {{
+                    {/* <Card sx = {{
                         borderRadius: '10px',
                         // minWidth: '360px',
                         padding: '25px',
@@ -317,7 +333,7 @@ const IntroFeatures = () => {
                         // justifySelf: 'center',
 
                         minHeight: '250px'
-                    }}></Card>
+                    }}></Card> */}
                     </Stack>
                     </Grid>
                     
