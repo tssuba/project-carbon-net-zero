@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import "@fontsource/plus-jakarta-sans/700.css";
 import "@fontsource/ibm-plex-sans";
@@ -212,47 +212,68 @@ all the carbon dioxide that are released. Planting trees offers a simple and eff
   spacing={{ xs: 1, sm: 2, md: 20 }}>
 
     <Button onClick= {handleCloseNavMenuN}>
-
-    <Stack>
+        <Card sx = {{
+            padding: 5
+        }}>
+        <Stack>
             
             <NewspaperOutlinedIcon sx = {{
-                fontSize: '9rem',
+                fontSize: '5rem',
             }} />
 
-<Typography textTransform='none'>
+<Typography textTransform='none'
+fontWeight = '600'
+>
 
 News
 </Typography>
 
       </Stack>
+        </Card>
+
+    
 
     </Button>
 
       <Button onClick= {handleCloseNavMenuR}>
-      <Stack>
+        <Card sx = {{
+            padding: 5
+        }}>
+        <Stack>
       <LibraryBooksOutlinedIcon sx = {{
-                fontSize: '9rem',
+                fontSize: '5rem',
               //   ml: 20,
               //   mr: 20,
             }}/>
 
-            <Typography textTransform='none'>
+            <Typography textTransform='none'
+            fontWeight = '600'
+            >
 
                 Research
             </Typography>
 
       </Stack>
+        </Card>
+      
 
       </Button>
       <Button onClick= {handleCloseNavMenuP}>
-      <Stack>
+        <Card sx = {{
+            padding: 5
+        }}>
+        <Stack>
             <TwitterIcon sx = {{
-                fontSize: '9rem'
+                fontSize: '5rem'
             }}/>
-            <Typography textTransform='none'>
+            <Typography textTransform='none'
+            fontWeight = '600'
+            >
                 Twitter
 </Typography>
             </Stack>
+        </Card>
+      
       </Button>
 
 
