@@ -23,6 +23,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 import StickyFooter from './components/footer';
 
+
 import Carousel from 'nuka-carousel';
 
 import { useNavigate } from 'react-router-dom'
@@ -148,7 +149,7 @@ function App() {
                       <LightModeOutlinedIcon fontSize='small' />}
                   </IconButton>
                 </Box>
-                <Box
+                {/* <Box
                   sx={customButtonStyle}>
                   <a href='https://github.com/tssuba/project-carbon-net-zero/' target='_blank' rel='noreferrer'>
                   <IconButton color="primary" size='small'
@@ -157,7 +158,7 @@ function App() {
                       <GitHubIcon />
                   </IconButton>
                   </a>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           </Container>
@@ -242,7 +243,7 @@ function App() {
 
           </Box>
         </main>
-        {/* <StickyFooter /> */}
+        <StickyFooter />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

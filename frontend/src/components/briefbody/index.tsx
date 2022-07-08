@@ -15,6 +15,7 @@ import { red, green, blue } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { Height } from '@mui/icons-material';
 import { Container } from '@mui/system';
+import Carousel from 'nuka-carousel';
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -93,6 +94,81 @@ const BriefBody = () => {
                 {' '}Why ?
             </span>
         </Typography >
+        <Box maxWidth='600px' sx = {{pb: 4}}>
+        <Carousel 
+        autoplay = {true}
+        autoplayInterval = {5000}
+        pauseOnHover = {true}
+        wrapAround = {true}
+        speed = {1000}
+        renderCenterLeftControls={({ previousSlide }) => (
+    null
+    )}
+    renderCenterRightControls={({ nextSlide }) => (
+      null
+    )}
+    // renderBottomCenterControls={() => (
+    //   null
+    // )}
+
+  >
+    <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Net-zero is a scientific concept whose objective is to keep the global average temperatures
+within a certain limit by applying constraints on the amount of carbon dioxide that can be
+present in earth's atmosphere at any given point of time.
+        </Typography>
+
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Net-zero for a particular country is a state in which a country’s excess carbon dioxide emissions
+are removed from atmosphere by carbon absorption or sequestration
+        </Typography>
+
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Ways to achieve carbon net-zero include cutting down on all emissions as much as we can and
+removing carbon dioxide from the atmosphere by carbon sequestration and absorption
+        </Typography>
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Carbon net-zero can also be viewed as a framework through which global action against climate
+change can be undertaken using suitable socio-economic and policy changes.
+        </Typography>
+        <Typography
+        marginBottom='30px'
+        fontFamily='IBM Plex Sans'
+        fontWeight='200'
+        color={curTheme.palette.mode === 'light' ?
+        '#3E5060' : 'rgb(178, 186, 194)'}
+        >
+            Large scale deforestation has created a situation where we do not have enough trees to absorb
+all the carbon dioxide that are released. Planting trees offers a simple and effective solution.
+        </Typography>
+        
+        </Carousel>
+        </Box>
+
         <Typography
         marginBottom='30px'
         fontFamily='IBM Plex Sans'

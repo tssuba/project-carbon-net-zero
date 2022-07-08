@@ -170,7 +170,7 @@ const ResponsiveAppBar = () => {
                   textTransform: 'none',
                   // typography: 'body3'
                 }}>
-                Briefing
+                About Us
               </Button>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

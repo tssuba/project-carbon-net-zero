@@ -120,7 +120,7 @@ function Briefing() {
                       <LightModeOutlinedIcon fontSize='small' />}
                   </IconButton>
                 </Box>
-                <Box
+                {/* <Box
                   sx={customButtonStyle}>
                   <a href='https://github.com/tssuba/project-carbon-net-zero/' target='_blank' rel='noreferrer'>
                   <IconButton color="primary" size='small'
@@ -129,7 +129,7 @@ function Briefing() {
                       <GitHubIcon />
                   </IconButton>
                   </a>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           </Container>
