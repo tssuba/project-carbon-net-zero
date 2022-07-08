@@ -151,20 +151,20 @@ const headCells: readonly HeadCell[] = [
   {
     id: 'title',
     numeric: false,
-    disablePadding: false,
-    label: 'Title',
+    disablePadding: true,
+    label: 'Dessert (100g serving)',
   },
   {
     id: 'publisher',
     numeric: true,
     disablePadding: false,
-    label: 'Publisher',
+    label: 'Calories',
   },
   {
     id: 'published_date',
     numeric: true,
     disablePadding: false,
-    label: 'Date',
+    label: 'Fat (g)',
   },
 ];
 
@@ -315,7 +315,7 @@ function News() {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -409,7 +409,7 @@ function News() {
                       <LightModeOutlinedIcon fontSize='small' />}
                   </IconButton>
                 </Box>
-                {/* <Box
+                <Box
                   sx={customButtonStyle}>
                   <a href='https://github.com/tssuba/project-carbon-net-zero/' target='_blank' rel='noreferrer'>
                   <IconButton color="primary" size='small'
@@ -418,7 +418,7 @@ function News() {
                       <GitHubIcon />
                   </IconButton>
                   </a>
-                </Box> */}
+                </Box>
               </Box>
             </Box>
           </Container>
@@ -442,94 +442,46 @@ function News() {
               </Stack>
           </h1>
 
-          <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={newsArticles.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-              rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(newsArticles, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.title)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.title}
-                      selected={isItemSelected}
-                    >
-                      <TableCell 
-                      // padding="checkbox"
-                      >
-                        {/* <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        /> */}
-                      </TableCell>
-                      {/* <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.title}
-                      </TableCell> */}
-                      <TableCell align="right">{row.title}</TableCell>
-                      <TableCell align="right">{row.publisher}</TableCell>
-                      <TableCell align="right">{row.published_date}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25]}
-          component="div"
-          count={newsArticles.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-    </Box>
+        <TableContainer component={Paper} sx = {{
+          height: 'calc(100vh - 200px)',
+          maxHeight: '1000px'
+        }}>
+      <Table  stickyHeader 
+      sx={{ minWidth: 650, bgcolor:'background.paper',
+    border: 1, borderColor: 'divider'
+    }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell align="right">Publisher</TableCell>
+            <TableCell align="right">Date</TableCell>
+          </TableRow>
+        </TableHead>    
+        <TableBody>
+          {reversedKeys.map((newsArticle) => (
+            <TableRow
+              key={newsArticle.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+              <a href={newsArticle.link} 
+              target='_blank' 
+              rel='noreferrer'
+              style={{ textDecoration: 'none',
+              color: 'primary.main' }}
+              >
+                <Typography fontWeight='600'>
+                {newsArticle.title} 
+                </Typography>
+                </a>
+              </TableCell>
+              <TableCell align="right">{newsArticle.publisher}</TableCell>
+              <TableCell align="right">{newsArticle.published_date}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
         </Container>
         </main>
       </ThemeProvider>

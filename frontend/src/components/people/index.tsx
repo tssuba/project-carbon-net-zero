@@ -147,7 +147,7 @@ function People() {
                       <LightModeOutlinedIcon fontSize='small' />}
                   </IconButton>
                 </Box>
-                <Box
+                {/* <Box
                   sx={customButtonStyle}>
                   <a href='https://github.com/tssuba/project-carbon-net-zero/' target='_blank' rel='noreferrer'>
                   <IconButton color="primary" size='small'
@@ -156,7 +156,7 @@ function People() {
                       <GitHubIcon />
                   </IconButton>
                   </a>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           </Container>
@@ -176,17 +176,18 @@ function People() {
              mx:'auto'
             }}
             >
-              <Stack sx = {{
-              }}>
-          {tweetIds.map((tweetId) => (
-            <div style={{
+              <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 4, md: 8 }}>
+              {tweetIds.map((tweetId) => (
+                <Grid item xs={4} sm={4} md={4}>
+                              <div style={{
               // width:'100%', 
               justifyContent:'center'}}
               key={tweetId.id}>
                 <TwitterTweetEmbed tweetId={tweetId.tweetId} />
             </div>
+                  </Grid>
           ))}
-              </Stack>
+              </Grid>
             </Box>
           </Container>
            
