@@ -5,14 +5,19 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import getDesignTokens from '../../theme';
-import { CssBaseline, Grid, Paper, Toolbar, Typography } from '@mui/material';
+import { CssBaseline, Grid, Paper, Stack, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import ResponsiveAppBar from '../../components/navbar';
+import ResponsiveAppBar from '../navbar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import "@fontsource/ibm-plex-sans";
-import Stack from '@mui/material/Stack';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 import axiosInstance from '../../utils/AxiosAPI';
 import {useState, useEffect} from "react";
@@ -28,7 +33,7 @@ const navBarStyle = {
   alignItems: 'center',
   justifyContent: 'space-between',
   alignContent: 'flex-start',
-  // bgcolor: '#000',
+  // bgcolor: 'background.default',
   borderRadius: 1,
   fontSize: '1rem',
   pt: 1.2,
@@ -64,16 +69,19 @@ const styles = {
 //   textTransform:'none'
 // }
 
-interface TweetIdType {
-  id: number;
-  tweetId: string;
-};
 
-function People() {
+interface ResearchArticleType {
+  id: number;
+  // link: string;
+  title: string;
+  publisher: string;
+  published_date: string;
+}
+
+
+function Research() {
 
   const theme = useTheme();
-
-  const curTheme = useTheme();
 
   const colorMode = React.useContext(ColorModeContext);
 
@@ -95,26 +103,21 @@ function People() {
   );
 
   const navBarColor = (mode === 'light' ? 'rgba(255,255,255,0.8)' : 'rgba(10, 25, 41, 0.72)');
+  
+  const [researchArticles, setResearchArticles] = useState<Array<ResearchArticleType>>([]);
 
-  // const githubNewTab = (url: string | URL | undefined) => {
-  //   window.open(url, '_blank', 'noopener, norefferer');
-  // };
+    const getResearchArticles = async () => {
+        const { data } = await axiosInstance.get("/research");
+        setResearchArticles(data);
+    };
 
-  const [tweetIds, setTweetIds] = useState<Array<TweetIdType>>([]);
-
-  const getTweetIds = async () => {
-      const { data } = await axiosInstance.get("/tweets");
-      setTweetIds(data);
-  };
-
-  useEffect(() => {
-      getTweetIds();
-  }, []);
+    useEffect(() => {
+        getResearchArticles();
+    }, []);
 
 
-  {/* {themeSet.palette.mode} mode */ }
   return (
-    <ColorModeContext.Provider value={colorModeSet}>
+<ColorModeContext.Provider value={colorModeSet}>
       <ThemeProvider theme={themeSet}>
         <CssBaseline />
         <AppBar
@@ -168,40 +171,63 @@ function People() {
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
-          <Container maxWidth = 'lg'>
-            <Box 
-            // bgcolor='rgba(0,0,0,0.5)' 
-            // display= 'flex'
-            width='550px'
-            sx = {{
-            [curTheme.breakpoints.down('sm')]: {
-              width: '400px',
-              mx: 'auto'
-            },
-             width: '850px',
-             mx:'auto',
-            //  bgcolor: '#f0f0f0'
-            }}
+        <Container maxWidth='lg' sx = {{ pt: 2}}>
+
+          <h1>
+            <Stack direction='row'>
+            <span>
+            <LibraryBooksIcon sx = {{
+            fontSize: '2rem',
+            pt: 1.5
+            }}/>
+              </span> 
+              <span> | Research</span>
+              {/* <Typography sx = {{mt: 2, ml: 2}}>
+                blah blah blah
+              </Typography> */}
+              </Stack>
+          </h1>
+
+        <TableContainer component={Paper} sx = {{
+          height: 'calc(100vh - 200px)',
+          maxHeight: '1000px'
+        }}>
+      <Table  stickyHeader 
+      sx={{ minWidth: 650, bgcolor:'background.paper',
+    border: 1, borderColor: 'divider'
+    }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell align="right">Publisher</TableCell>
+            <TableCell align="right">Date</TableCell>
+          </TableRow>
+        </TableHead>    
+
+        <TableBody>
+          {researchArticles.map((researchArticle) => (
+            <TableRow
+              key={researchArticle.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 4, md: 8 }}>
-              {tweetIds.map((tweetId) => (
-                <Grid item xs={4} sm={4} md={4}>
-                              <div style={{
-              width:'400px', 
-              justifyContent:'center'}}
-              key={tweetId.id}>
-                <TwitterTweetEmbed tweetId={tweetId.tweetId} />
-            </div>
-                  </Grid>
+              <TableCell component="th" scope="row">
+                <Typography fontWeight='600'>
+                {researchArticle.title}
+                </Typography>
+                
+              </TableCell>
+              <TableCell align="right">{researchArticle.publisher}</TableCell>
+              <TableCell align="right">{researchArticle.published_date}</TableCell>
+            </TableRow>
           ))}
-              </Grid>
-            </Box>
-          </Container>
-           
+        </TableBody>
+      </Table>
+    </TableContainer>
+        </Container>
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
 
-export default People;
+export default Research;

@@ -209,7 +209,7 @@ all the carbon dioxide that are released. Planting trees offers a simple and eff
             // bgcolor: '#f0f0f0'
         }}>
             <Stack direction={{ xs: 'column', sm: 'row' }}
-  spacing={{ xs: 1, sm: 2, md: 20 }}>
+  spacing={{ xs: 1, sm: 2, md: 40 }}>
 
     <Button onClick= {handleCloseNavMenuN}>
         <Card sx = {{

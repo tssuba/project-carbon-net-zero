@@ -9,7 +9,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://iitm.ac.in/">
+      <Link color="inherit" href="https://www.iitm.ac.in/">
         IIT Madras
       </Link>{' '}
       {new Date().getFullYear()}

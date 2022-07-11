@@ -86,6 +86,22 @@ const BriefBody = () => {
             fontSize='clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)'
         >
                 Carbon Net Zero
+            {/* <span 
+                style={curTheme.palette.mode === 'light' ?
+                styles.spanColorLight : styles.spanColorDark
+            }
+                >
+                {' '}Why ?
+            </span> */}
+        </Typography >
+        <Typography
+        marginBottom='20px'
+            variant='h1'
+            style={styles.customizeTyporaphy}
+            fontWeight='600'
+            lineHeight='1.11429'
+            fontSize='clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)'
+        >
             <span 
                 style={curTheme.palette.mode === 'light' ?
                 styles.spanColorLight : styles.spanColorDark

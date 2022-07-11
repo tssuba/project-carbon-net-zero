@@ -89,7 +89,8 @@ const ResponsiveAppBar = () => {
               letterSpacing: '.3rem',
               color: 'primary.main',
               textDecoration: 'none',
-              fontSize: 'medium'
+              fontSize: 'medium',
+              pl: 4,
             }}
           >
             IITM | Carbon Net Zero

@@ -94,6 +94,7 @@ function Briefing() {
           enableColorOnDark
           style={{ 
             backgroundColor: navBarColor, 
+            // backgroundColor: '#fff000'
           }} sx={{
             boxShadow: 'none',
             borderBottom: 1,
@@ -101,15 +102,19 @@ function Briefing() {
             backgroundImage: 'none',
           }}
         >
-          <Container sx={{
-          }}>
-            <Box sx={navBarStyle} maxWidth='lg'
+          {/* <Container sx={{ 
+            bgcolor: '#f0f0f0',
+            width: '100%',
+          }}> */}
+            <Box sx={navBarStyle} maxWidth='100%' 
+            // bgcolor='#000'
             >
               <ResponsiveAppBar />
               <Box sx = {{
                 display: 'inline-flex',
                 justifyContent: 'space-evenly',
-                flexDirection: 'row-reverse'
+                flexDirection: 'row-reverse',
+                pr: 4,
               }}>
                 <Box
                   sx={customButtonStyle}>
@@ -132,12 +137,12 @@ function Briefing() {
                 </Box> */}
               </Box>
             </Box>
-          </Container>
+          {/* </Container> */}
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
           <Box>
-            <Container maxWidth='lg'>
+            <Container maxWidth='xl'>
               {/* <Paper> */}
               <Grid container columns={{ xs: 4, sm: 4, md: 12 }} spacing={10}>
                 <Grid item xs={4} sm={4} md={6}>

@@ -149,13 +149,10 @@ interface EnhancedTableProps {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'title',
-    numeric: false,
-    disablePadding: false,
-    label: 'Title',
-  },
-  {
     id: 'publisher',
+    // numeric: false,
+    // disablePadding: false,
+    // label: 'Title',
     numeric: true,
     disablePadding: false,
     label: 'Publisher',
@@ -165,6 +162,12 @@ const headCells: readonly HeadCell[] = [
     numeric: true,
     disablePadding: false,
     label: 'Date',
+  },
+  {
+    id: 'title',
+    numeric: true,
+    disablePadding: false,
+    label: 'Title',
   },
 ];
 
@@ -180,7 +183,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
@@ -188,7 +191,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             inputProps={{
               'aria-label': 'select all desserts',
             }}
-          />
+          /> */}
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -383,6 +386,7 @@ function News() {
           enableColorOnDark
           style={{ 
             backgroundColor: navBarColor, 
+            // backgroundColor: '#fff000'
           }} sx={{
             boxShadow: 'none',
             borderBottom: 1,
@@ -390,15 +394,19 @@ function News() {
             backgroundImage: 'none',
           }}
         >
-          <Container sx={{
-          }}>
-            <Box sx={navBarStyle} maxWidth='lg'
+          {/* <Container sx={{ 
+            bgcolor: '#f0f0f0',
+            width: '100%',
+          }}> */}
+            <Box sx={navBarStyle} maxWidth='100%' 
+            // bgcolor='#000'
             >
               <ResponsiveAppBar />
               <Box sx = {{
                 display: 'inline-flex',
                 justifyContent: 'space-evenly',
-                flexDirection: 'row-reverse'
+                flexDirection: 'row-reverse',
+                pr: 4,
               }}>
                 <Box
                   sx={customButtonStyle}>
@@ -421,7 +429,7 @@ function News() {
                 </Box> */}
               </Box>
             </Box>
-          </Container>
+          {/* </Container> */}
         </AppBar>
         <Toolbar style={styles.customizeToolbar}/>
         <main>
@@ -444,7 +452,7 @@ function News() {
 
           <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -497,9 +505,12 @@ function News() {
                       >
                         {row.title}
                       </TableCell> */}
-                      <TableCell align="right">{row.title}</TableCell>
-                      <TableCell align="right">{row.publisher}</TableCell>
+                      <TableCell align="right"><a href={row.link} target="_blank" rel="noreferrer">
+                      {row.publisher}
+                        </a>
+                        </TableCell>
                       <TableCell align="right">{row.published_date}</TableCell>
+                      <TableCell align="right">{row.title}</TableCell>
                     </TableRow>
                   );
                 })}
